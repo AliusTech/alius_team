@@ -1,15 +1,12 @@
 use crate::db::DbState;
 use crate::db::models::agent::AgentData;
 use chrono::Utc;
-use rusqlite::{params, OptionalExtension};
+use rusqlite::{params, Connection, OptionalExtension};
 use tauri::State;
 
-#[tauri::command]
-pub fn save_agents(db: State<DbState>, agents: Vec<AgentData>) -> Result<(), String> {
-    let conn = db.0.lock().map_err(|e| e.to_string())?;
+pub fn save_agents_inner(conn: &Connection, agents: &[AgentData]) -> Result<(), String> {
     let now = Utc::now().timestamp_millis();
 
-    // 清空旧数据后插入新数据
     conn.execute("DELETE FROM agents", [])
         .map_err(|e| format!("Failed to clear agents: {}", e))?;
 
@@ -46,7 +43,6 @@ pub fn save_agents(db: State<DbState>, agents: Vec<AgentData>) -> Result<(), Str
         .map_err(|e| format!("Failed to save agent {}: {}", agent.agent_id, e))?;
     }
 
-    // 更新缓存元数据
     conn.execute(
         "INSERT OR REPLACE INTO cache_meta (key, updated_at) VALUES ('agents', ?1)",
         params![now],
@@ -56,10 +52,7 @@ pub fn save_agents(db: State<DbState>, agents: Vec<AgentData>) -> Result<(), Str
     Ok(())
 }
 
-#[tauri::command]
-pub fn get_agents(db: State<DbState>) -> Result<Vec<AgentData>, String> {
-    let conn = db.0.lock().map_err(|e| e.to_string())?;
-
+pub fn get_agents_inner(conn: &Connection) -> Result<Vec<AgentData>, String> {
     let mut stmt = conn
         .prepare(
             r#"
@@ -101,9 +94,7 @@ pub fn get_agents(db: State<DbState>) -> Result<Vec<AgentData>, String> {
     Ok(agents)
 }
 
-#[tauri::command]
-pub fn clear_agents(db: State<DbState>) -> Result<(), String> {
-    let conn = db.0.lock().map_err(|e| e.to_string())?;
+pub fn clear_agents_inner(conn: &Connection) -> Result<(), String> {
     conn.execute("DELETE FROM agents", [])
         .map_err(|e| format!("Failed to clear agents: {}", e))?;
     conn.execute("DELETE FROM cache_meta WHERE key = 'agents'", [])
@@ -111,10 +102,7 @@ pub fn clear_agents(db: State<DbState>) -> Result<(), String> {
     Ok(())
 }
 
-#[tauri::command]
-pub fn get_agents_cache_time(db: State<DbState>) -> Result<Option<i64>, String> {
-    let conn = db.0.lock().map_err(|e| e.to_string())?;
-
+pub fn get_agents_cache_time_inner(conn: &Connection) -> Result<Option<i64>, String> {
     let result: Option<i64> = conn
         .query_row(
             "SELECT updated_at FROM cache_meta WHERE key = 'agents'",
@@ -125,4 +113,185 @@ pub fn get_agents_cache_time(db: State<DbState>) -> Result<Option<i64>, String> 
         .map_err(|e| format!("Failed to get cache time: {}", e))?;
 
     Ok(result)
+}
+
+#[tauri::command]
+pub fn save_agents(db: State<DbState>, agents: Vec<AgentData>) -> Result<(), String> {
+    let conn = db.0.lock().map_err(|e| e.to_string())?;
+    save_agents_inner(&conn, &agents)
+}
+
+#[tauri::command]
+pub fn get_agents(db: State<DbState>) -> Result<Vec<AgentData>, String> {
+    let conn = db.0.lock().map_err(|e| e.to_string())?;
+    get_agents_inner(&conn)
+}
+
+#[tauri::command]
+pub fn clear_agents(db: State<DbState>) -> Result<(), String> {
+    let conn = db.0.lock().map_err(|e| e.to_string())?;
+    clear_agents_inner(&conn)
+}
+
+#[tauri::command]
+pub fn get_agents_cache_time(db: State<DbState>) -> Result<Option<i64>, String> {
+    let conn = db.0.lock().map_err(|e| e.to_string())?;
+    get_agents_cache_time_inner(&conn)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::db::schema::create_tables;
+    use rusqlite::Connection;
+
+    fn setup_db() -> Connection {
+        let conn = Connection::open_in_memory().unwrap();
+        create_tables(&conn).unwrap();
+        conn
+    }
+
+    fn sample_agent(id: &str, updated_at: i64) -> AgentData {
+        AgentData {
+            agent_id: id.to_string(),
+            node_id: "node-1".to_string(),
+            name: format!("Agent {}", id),
+            role: "developer".to_string(),
+            status: "idle".to_string(),
+            connection_status: "connected".to_string(),
+            soul_name: "soul".to_string(),
+            soul_version: "1.0.0".to_string(),
+            current_task_id: None,
+            current_task_title: None,
+            model_name: Some("gpt-4".to_string()),
+            tokens_today: 100,
+            tokens_this_month: 2000,
+            estimated_cost_this_month: Some(1.5),
+            last_active_at: 1000,
+            created_at: 500,
+            updated_at,
+        }
+    }
+
+    #[test]
+    fn get_returns_empty_when_no_agents() {
+        let conn = setup_db();
+        assert!(get_agents_inner(&conn).unwrap().is_empty());
+    }
+
+    #[test]
+    fn save_multiple_then_get_all() {
+        let conn = setup_db();
+        let agents = vec![
+            sample_agent("a1", 100),
+            sample_agent("a2", 200),
+            sample_agent("a3", 300),
+        ];
+        save_agents_inner(&conn, &agents).unwrap();
+
+        let got = get_agents_inner(&conn).unwrap();
+        assert_eq!(got.len(), 3);
+    }
+
+    #[test]
+    fn save_clears_old_before_insert() {
+        let conn = setup_db();
+        save_agents_inner(&conn, &[sample_agent("a1", 100), sample_agent("a2", 200)]).unwrap();
+        assert_eq!(get_agents_inner(&conn).unwrap().len(), 2);
+
+        save_agents_inner(&conn, &[sample_agent("a3", 300)]).unwrap();
+        let got = get_agents_inner(&conn).unwrap();
+        assert_eq!(got.len(), 1);
+        assert_eq!(got[0].agent_id, "a3");
+    }
+
+    #[test]
+    fn get_ordered_by_updated_at_desc() {
+        let conn = setup_db();
+        let agents = vec![
+            sample_agent("old", 100),
+            sample_agent("new", 900),
+            sample_agent("mid", 500),
+        ];
+        save_agents_inner(&conn, &agents).unwrap();
+
+        let got = get_agents_inner(&conn).unwrap();
+        assert_eq!(got[0].agent_id, "new");
+        assert_eq!(got[1].agent_id, "mid");
+        assert_eq!(got[2].agent_id, "old");
+    }
+
+    #[test]
+    fn fields_round_trip() {
+        let conn = setup_db();
+        let agent = sample_agent("a1", 12345);
+        save_agents_inner(&conn, &[agent]).unwrap();
+
+        let got = &get_agents_inner(&conn).unwrap()[0];
+        assert_eq!(got.agent_id, "a1");
+        assert_eq!(got.node_id, "node-1");
+        assert_eq!(got.name, "Agent a1");
+        assert_eq!(got.role, "developer");
+        assert_eq!(got.status, "idle");
+        assert_eq!(got.connection_status, "connected");
+        assert_eq!(got.soul_name, "soul");
+        assert_eq!(got.soul_version, "1.0.0");
+        assert_eq!(got.model_name.as_deref(), Some("gpt-4"));
+        assert_eq!(got.tokens_today, 100);
+        assert_eq!(got.tokens_this_month, 2000);
+        assert_eq!(got.estimated_cost_this_month, Some(1.5));
+        assert_eq!(got.updated_at, 12345);
+    }
+
+    #[test]
+    fn none_optionals_round_trip() {
+        let conn = setup_db();
+        let mut agent = sample_agent("a1", 100);
+        agent.current_task_id = None;
+        agent.current_task_title = None;
+        agent.model_name = None;
+        agent.estimated_cost_this_month = None;
+        save_agents_inner(&conn, &[agent]).unwrap();
+
+        let got = &get_agents_inner(&conn).unwrap()[0];
+        assert!(got.current_task_id.is_none());
+        assert!(got.current_task_title.is_none());
+        assert!(got.model_name.is_none());
+        assert!(got.estimated_cost_this_month.is_none());
+    }
+
+    #[test]
+    fn clear_removes_all_agents() {
+        let conn = setup_db();
+        save_agents_inner(&conn, &[sample_agent("a1", 100)]).unwrap();
+        assert!(!get_agents_inner(&conn).unwrap().is_empty());
+
+        clear_agents_inner(&conn).unwrap();
+        assert!(get_agents_inner(&conn).unwrap().is_empty());
+    }
+
+    #[test]
+    fn clear_resets_cache_time() {
+        let conn = setup_db();
+        save_agents_inner(&conn, &[sample_agent("a1", 100)]).unwrap();
+        assert!(get_agents_cache_time_inner(&conn).unwrap().is_some());
+
+        clear_agents_inner(&conn).unwrap();
+        assert!(get_agents_cache_time_inner(&conn).unwrap().is_none());
+    }
+
+    #[test]
+    fn cache_time_none_before_first_save() {
+        let conn = setup_db();
+        assert!(get_agents_cache_time_inner(&conn).unwrap().is_none());
+    }
+
+    #[test]
+    fn cache_time_set_after_save() {
+        let conn = setup_db();
+        save_agents_inner(&conn, &[sample_agent("a1", 100)]).unwrap();
+        let t = get_agents_cache_time_inner(&conn).unwrap();
+        assert!(t.is_some());
+        assert!(t.unwrap() > 0);
+    }
 }

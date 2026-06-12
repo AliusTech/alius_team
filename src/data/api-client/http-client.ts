@@ -104,7 +104,7 @@ async function refreshAccessToken(): Promise<string> {
 }
 
 // 解析错误响应
-async function parseErrorResponse(response: Response): Promise<HTTPClientError> {
+export async function parseErrorResponse(response: Response): Promise<HTTPClientError> {
   try {
     const errorData: ErrorResponse = await response.json();
     return HTTPClientError.fromAPIResponse(errorData.error);

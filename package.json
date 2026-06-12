@@ -14,7 +14,10 @@
     "tauri:build:dmg": "tauri build --bundles dmg",
     "tauri:build:all": "tauri build --bundles msi,dmg",
     "tauri:ios:dev": "tauri ios dev",
-    "tauri:ios:build": "tauri ios build"
+    "tauri:ios:build": "tauri ios build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.14",
@@ -44,14 +47,20 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.8",
     "@tauri-apps/cli": "^2.11.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",
+    "@vitest/coverage-v8": "^4.1.8",
     "autoprefixer": "^10.4.21",
+    "jsdom": "^29.1.1",
     "playwright": "^1.60.0",
     "postcss": "^8.5.4",
     "tailwindcss": "^4.1.8",
     "typescript": "~5.8.3",
-    "vite": "^7.0.4"
+    "vite": "^7.0.4",
+    "vitest": "^4.1.8"
   }
 }

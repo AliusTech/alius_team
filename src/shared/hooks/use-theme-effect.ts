@@ -10,7 +10,7 @@ async function setTauriTheme(isDark: boolean) {
   }
 }
 
-function resolveIsDark(mode: 'light' | 'dark' | 'system'): boolean {
+export function resolveIsDark(mode: 'light' | 'dark' | 'system'): boolean {
   return (
     mode === 'dark' ||
     (mode === 'system' &&

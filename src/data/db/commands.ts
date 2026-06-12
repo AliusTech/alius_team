@@ -5,7 +5,7 @@ import type { DbSession, DbAgent } from './types';
 
 // ============ 类型转换函数 ============
 
-function userToDbUser(user: User): { id: string; phone: string; name?: string; email?: string; avatar?: string } {
+export function userToDbUser(user: User): { id: string; phone: string; name?: string; email?: string; avatar?: string } {
   return {
     id: user.id,
     phone: user.phone,
@@ -15,7 +15,7 @@ function userToDbUser(user: User): { id: string; phone: string; name?: string; e
   };
 }
 
-function dbUserToUser(dbUser: { id: string; phone: string; name?: string; email?: string; avatar?: string }): User {
+export function dbUserToUser(dbUser: { id: string; phone: string; name?: string; email?: string; avatar?: string }): User {
   return {
     id: dbUser.id,
     phone: dbUser.phone,
@@ -25,7 +25,7 @@ function dbUserToUser(dbUser: { id: string; phone: string; name?: string; email?
   };
 }
 
-function sessionToDbSession(session: Session): DbSession {
+export function sessionToDbSession(session: Session): DbSession {
   return {
     access_token: session.accessToken,
     refresh_token: session.refreshToken,
@@ -34,7 +34,7 @@ function sessionToDbSession(session: Session): DbSession {
   };
 }
 
-function dbSessionToSession(dbSession: DbSession): Session {
+export function dbSessionToSession(dbSession: DbSession): Session {
   return {
     accessToken: dbSession.access_token,
     refreshToken: dbSession.refresh_token,
@@ -43,7 +43,7 @@ function dbSessionToSession(dbSession: DbSession): Session {
   };
 }
 
-function agentToDbAgent(agent: Agent): DbAgent {
+export function agentToDbAgent(agent: Agent): DbAgent {
   return {
     agent_id: agent.agentId,
     node_id: agent.nodeId,
@@ -65,7 +65,7 @@ function agentToDbAgent(agent: Agent): DbAgent {
   };
 }
 
-function dbAgentToAgent(dbAgent: DbAgent): Agent {
+export function dbAgentToAgent(dbAgent: DbAgent): Agent {
   return {
     agentId: dbAgent.agent_id,
     nodeId: dbAgent.node_id,

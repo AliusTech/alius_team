@@ -70,13 +70,20 @@ export function Sidebar() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        'h-full border-r border-border bg-card flex flex-col pb-3 shrink-0 overflow-hidden',
+        'h-full border-r border-border bg-card flex flex-col pb-3 shrink-0 overflow-hidden relative',
         'transition-[width] duration-300 ease-in-out',
         widthClass,
         mode === 'expanded' ? 'pl-2 pr-2' : 'items-center px-0'
       )}
       style={{ paddingTop: 'calc(1.5rem + var(--safe-area-top))' }}
     >
+      {/* Window drag region */}
+      <div
+        data-tauri-drag-region
+        className="absolute top-0 left-0 right-0"
+        style={{ height: 'calc(3rem + var(--safe-area-top))' }}
+      />
+
       {/* Logo */}
       <Link
         to="/app/dashboard"
