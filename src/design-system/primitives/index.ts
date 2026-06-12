@@ -8,3 +8,5 @@ export { ChartContainer, ChartTooltip, ChartTooltipContent } from './chart';
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './tooltip';
 export { Select } from './select';
 export type { SelectOption, SelectProps } from './select';
+export { LottiePlayer } from './lottie-player';
+export type { LottiePlayerProps } from './lottie-player';

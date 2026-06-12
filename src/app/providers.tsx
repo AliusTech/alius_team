@@ -3,8 +3,10 @@ import '@/i18n';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useSessionStore } from "@/stores/session-store";
+import { useNotificationStore } from "@/stores/notification-store";
 import { useThemeEffect } from "@/shared/hooks/use-theme-effect";
 import { useUpdateCheck } from "@/shared/hooks/use-update-check";
+import { usePushConnection } from "@/shared/hooks/use-push-connection";
 import { UpdateDialog } from "@/features/settings/components/update-dialog";
 
 const queryClient = new QueryClient({
@@ -22,14 +24,32 @@ function UpdateChecker() {
   return <UpdateDialog />;
 }
 
+function PushNotifications() {
+  usePushConnection();
+  return null;
+}
+
 export function Providers({ children }: { children: React.ReactNode }) {
   useThemeEffect();
   const loadSession = useSessionStore((state) => state.loadSession);
+  const isAuthenticated = useSessionStore((state) => state.isAuthenticated);
   const isLoaded = useSessionStore((state) => state.isLoaded);
+  const loadNotifications = useNotificationStore((s) => s.loadNotifications);
+  const loadUnreadCount = useNotificationStore((s) => s.loadUnreadCount);
 
   useEffect(() => {
     loadSession();
   }, [loadSession]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    loadNotifications();
+  }, [isAuthenticated, loadNotifications]);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    loadUnreadCount();
+  }, [isAuthenticated, loadUnreadCount]);
 
   if (!isLoaded) {
     return (
@@ -42,6 +62,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <UpdateChecker />
+      <PushNotifications />
       {children}
     </QueryClientProvider>
   );

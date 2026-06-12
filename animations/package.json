@@ -1,0 +1,22 @@
+{
+  "name": "alius-animations",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render",
+    "export:lottie": "remotion render --output-format=lottie"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.261",
+    "@remotion/lottie": "4.0.261",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "remotion": "4.0.261"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config": "4.0.261",
+    "@types/react": "^19.1.0",
+    "typescript": "^5.8.3"
+  }
+}

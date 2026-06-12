@@ -46,7 +46,7 @@ export function PhoneLayout() {
             </div>
             <div
               className="h-64 overflow-y-auto p-4"
-              style={{ paddingBottom: 'calc(1rem + var(--safe-area-bottom))' }}
+              style={{ paddingBottom: 'calc(var(--bottom-sheet-padding) + var(--safe-area-bottom))' }}
             >
               <div className="text-sm text-muted-foreground">
                 {t('inspector.selectHint')}

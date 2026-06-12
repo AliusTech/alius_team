@@ -56,10 +56,10 @@ export function Sidebar() {
     setHovering(false);
   };
 
-  const widthClass =
-    mode === 'expanded' ? 'w-[220px]' :
-    mode === 'rail' ? 'w-[72px]' :
-    'w-14';
+  const widthStyle =
+    mode === 'expanded' ? 'var(--sidebar-width)' :
+    mode === 'rail' ? 'var(--sidebar-rail-width)' :
+    'var(--sidebar-collapsed-width)';
 
   const showLabels = mode === 'expanded';
   const showRecentTasks = mode === 'expanded';
@@ -72,16 +72,15 @@ export function Sidebar() {
       className={cn(
         'h-full border-r border-border bg-card flex flex-col pb-3 shrink-0 overflow-hidden relative',
         'transition-[width] duration-300 ease-in-out',
-        widthClass,
         mode === 'expanded' ? 'pl-2 pr-2' : 'items-center px-0'
       )}
-      style={{ paddingTop: 'calc(1.5rem + var(--safe-area-top))' }}
+      style={{ paddingTop: 'calc(var(--sidebar-top-offset) + var(--safe-area-top))', width: widthStyle }}
     >
       {/* Window drag region */}
       <div
         data-tauri-drag-region
         className="absolute top-0 left-0 right-0"
-        style={{ height: 'calc(3rem + var(--safe-area-top))' }}
+        style={{ height: 'calc(var(--drag-region-height) + var(--safe-area-top))' }}
       />
 
       {/* Logo */}

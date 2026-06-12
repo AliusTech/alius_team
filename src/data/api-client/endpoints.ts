@@ -1,4 +1,9 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.alius.tech';
+const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL || 'wss://api.alius.tech';
+
+export const WS_ENDPOINTS = {
+  NOTIFICATIONS: `${WS_BASE_URL}/ws/notifications`,
+} as const;
 
 export const API_ENDPOINTS = {
   AUTH: {

@@ -62,12 +62,12 @@ export function Inspector() {
         <aside
           className="fixed right-0 z-40 bg-card border-l border-border shadow-xl flex flex-col"
           style={{
-            top: 'var(--safe-area-top, 0px)',
+            top: 'var(--safe-area-top)',
             bottom: 0,
-            width: 'min(360px, 85vw)',
+            width: 'min(var(--inspector-width), 85vw)',
           }}
         >
-          <div className="h-14 border-b border-border flex items-center justify-between px-3.5 shrink-0">
+          <div style={{ height: 'var(--inspector-header-height)' }} className="border-b border-border flex items-center justify-between px-3.5 shrink-0">
             <span className="text-xs font-medium text-foreground">Details</span>
             <button
               onClick={() => setInspectorCollapsed(true)}
@@ -86,8 +86,8 @@ export function Inspector() {
   }
 
   return (
-    <aside className="w-[360px] h-full border-l border-border bg-card flex flex-col shrink-0">
-      <div className="h-14 border-b border-border flex items-center justify-between px-3.5 shrink-0">
+    <aside style={{ width: 'var(--inspector-width)' }} className="h-full border-l border-border bg-card flex flex-col shrink-0">
+      <div style={{ height: 'var(--inspector-header-height)' }} className="border-b border-border flex items-center justify-between px-3.5 shrink-0">
         <span className="text-xs font-medium text-foreground">Details</span>
         <button
           onClick={() => setInspectorCollapsed(true)}

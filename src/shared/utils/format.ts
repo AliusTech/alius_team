@@ -1,6 +1,6 @@
 import type { SupportedLocale } from '@/i18n/i18n-store';
 
-export function formatDate(date: Date | string, locale: SupportedLocale): string {
+export function formatDate(date: Date | string | number, locale: SupportedLocale): string {
   return new Intl.DateTimeFormat(locale, {
     month: 'short',
     day: 'numeric',

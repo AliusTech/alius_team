@@ -71,6 +71,25 @@
     "openInspector": "展开详情面板",
     "closeInspector": "收起详情面板"
   },
+  "notifications": {
+    "title": "通知",
+    "empty": "暂无通知",
+    "emptyHint": "暂无新通知",
+    "markAllRead": "全部已读",
+    "clearAll": "清空全部",
+    "markRead": "标记已读",
+    "delete": "删除",
+    "unread": "未读 {{count}}",
+    "category": {
+      "task": "任务",
+      "agent": "智能体",
+      "system": "系统"
+    },
+    "priority": {
+      "high": "高优先级",
+      "normal": "普通"
+    }
+  },
   "app": {
     "name": "隐",
     "loading": "Loading..."

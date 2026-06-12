@@ -71,6 +71,25 @@
     "openInspector": "詳細パネルを開く",
     "closeInspector": "詳細パネルを閉じる"
   },
+  "notifications": {
+    "title": "通知",
+    "empty": "通知はありません",
+    "emptyHint": "新着通知はありません",
+    "markAllRead": "すべて既読にする",
+    "clearAll": "すべて消去",
+    "markRead": "既読にする",
+    "delete": "削除",
+    "unread": "未読 {{count}} 件",
+    "category": {
+      "task": "タスク",
+      "agent": "エージェント",
+      "system": "システム"
+    },
+    "priority": {
+      "high": "高優先度",
+      "normal": "通常"
+    }
+  },
   "app": {
     "name": "Alius",
     "loading": "読み込み中..."

@@ -71,6 +71,25 @@
     "openInspector": "Open details panel",
     "closeInspector": "Close details panel"
   },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "No notifications",
+    "emptyHint": "No new notifications",
+    "markAllRead": "Mark all read",
+    "clearAll": "Clear all",
+    "markRead": "Mark read",
+    "delete": "Delete",
+    "unread": "{{count}} unread",
+    "category": {
+      "task": "Task",
+      "agent": "Agent",
+      "system": "System"
+    },
+    "priority": {
+      "high": "High priority",
+      "normal": "Normal"
+    }
+  },
   "app": {
     "name": "Alius",
     "loading": "Loading..."

@@ -11,12 +11,20 @@
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1200px;
 
-  /* Layout Dimensions */
-  --sidebar-width: 220px;
-  --sidebar-collapsed-width: 56px;
-  --sidebar-rail-width: 72px;
-  --inspector-width: 360px;
-  --bottom-nav-height: 64px;
+  /* Layout Spacing — all values in rem */
+  --header-height: 3.5rem;
+  --drag-region-height: 3rem;
+  --content-offset: 1.5rem;
+  --sidebar-width: 13.75rem;
+  --sidebar-collapsed-width: 3.5rem;
+  --sidebar-rail-width: 4.5rem;
+  --sidebar-top-offset: 1.5rem;
+  --inspector-width: 22.5rem;
+  --inspector-header-height: 3.5rem;
+  --bottom-nav-height: 4rem;
+  --floating-controls-top: 1rem;
+  --floating-controls-right: 1.5rem;
+  --bottom-sheet-padding: 1rem;
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
   --safe-area-top: env(safe-area-inset-top, 0px);
   --safe-area-left: env(safe-area-inset-left, 0px);

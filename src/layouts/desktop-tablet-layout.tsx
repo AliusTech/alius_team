@@ -21,7 +21,7 @@ export function DesktopTabletLayout() {
         <div
           data-tauri-drag-region
           className="absolute top-0 left-0 right-0 z-10"
-          style={{ height: 'calc(var(--safe-area-top, 0px) + 48px)' }}
+          style={{ height: 'calc(var(--safe-area-top) + var(--drag-region-height))' }}
         />
 
         {/* Floating controls positioned at top-right of main content */}
@@ -30,7 +30,7 @@ export function DesktopTabletLayout() {
         {/* Content area */}
         <div
           className="flex-1 overflow-y-auto bg-background p-6"
-          style={{ paddingTop: 'calc(var(--safe-area-top, 0px) + 24px)' }}
+          style={{ paddingTop: 'calc(var(--safe-area-top) + var(--content-offset))' }}
         >
           <Outlet />
         </div>

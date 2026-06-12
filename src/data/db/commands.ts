@@ -1,6 +1,7 @@
 import { invoke } from '@tauri-apps/api/core';
 import type { Session, User } from '@/features/auth/types';
 import type { Agent } from '@/features/agents/types/agent';
+import type { PushNotification } from '@/data/realtime/types';
 import type { DbSession, DbAgent } from './types';
 
 // ============ 类型转换函数 ============
@@ -123,4 +124,30 @@ export async function clearAgents(): Promise<void> {
 
 export async function getAgentsCacheTime(): Promise<number | null> {
   return invoke('get_agents_cache_time');
+}
+
+// ============ Notification Commands ============
+
+export async function getNotifications(limit = 50, offset = 0, unreadOnly = false): Promise<PushNotification[]> {
+  return invoke<PushNotification[]>('get_notifications', { limit, offset, unreadOnly });
+}
+
+export async function markNotificationRead(id: string): Promise<void> {
+  return invoke('mark_notification_read', { id });
+}
+
+export async function markAllNotificationsRead(): Promise<void> {
+  return invoke('mark_all_notifications_read');
+}
+
+export async function deleteNotification(id: string): Promise<void> {
+  return invoke('delete_notification', { id });
+}
+
+export async function clearAllNotifications(): Promise<void> {
+  return invoke('clear_all_notifications');
+}
+
+export async function getUnreadNotificationCount(): Promise<number> {
+  return invoke<number>('get_unread_notification_count');
 }
