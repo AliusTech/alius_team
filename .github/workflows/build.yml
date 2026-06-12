@@ -37,7 +37,6 @@ jobs:
   build:
     needs: test
     permissions:
-    permissions:
       contents: write
     strategy:
       fail-fast: false
