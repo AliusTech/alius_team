@@ -18,7 +18,9 @@
     "appearance": "Appearance",
     "appearanceDesc": "Theme, language, notification preferences",
     "about": "About Alius Team",
-    "aboutDesc": "Version info, open source licenses, contact"
+    "aboutDesc": "Version info, open source licenses, contact",
+    "checkUpdate": "Check for Updates",
+    "checkUpdateDesc": "Check if a newer version is available"
   },
   "language": {
     "title": "Language",
@@ -29,5 +31,11 @@
     "light": "Light",
     "dark": "Dark",
     "system": "System"
+  },
+  "update": {
+    "checking": "Checking for updates…",
+    "upToDate": "You're on the latest version",
+    "newVersion": "New version {{version}} available",
+    "error": "Update check failed. Please try again later"
   }
 }

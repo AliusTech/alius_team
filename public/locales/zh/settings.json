@@ -18,7 +18,9 @@
     "appearance": "外观设置",
     "appearanceDesc": "主题、语言、通知偏好",
     "about": "关于 Alius Team",
-    "aboutDesc": "版本信息、开源许可、联系方式"
+    "aboutDesc": "版本信息、开源许可、联系方式",
+    "checkUpdate": "检查更新",
+    "checkUpdateDesc": "查看是否有新版本可用"
   },
   "language": {
     "title": "语言",
@@ -29,5 +31,11 @@
     "light": "浅色",
     "dark": "深色",
     "system": "跟随系统"
+  },
+  "update": {
+    "checking": "正在检查更新…",
+    "upToDate": "已是最新版本",
+    "newVersion": "发现新版本 {{version}}，请前往下载",
+    "error": "检查更新失败，请稍后重试"
   }
 }
