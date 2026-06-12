@@ -1,6 +1,7 @@
 import { useI18nStore, SUPPORTED_LOCALES, LOCALE_LABELS } from '@/i18n/i18n-store';
 import { Globe, Check } from 'lucide-react';
 
+/** Language selection list with a check mark on the active locale. */
 export function LanguageSwitcher() {
   const locale = useI18nStore((s) => s.locale);
   const setLocale = useI18nStore((s) => s.setLocale);

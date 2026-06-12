@@ -4,6 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/utils/cn';
 import { Loader2 } from 'lucide-react';
 
+/** Variant class map for the Button component. */
 const buttonVariants = cva(
   'inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
   {
@@ -30,6 +31,7 @@ const buttonVariants = cva(
   }
 );
 
+/** Props for the Button component, extending native button attributes with variant and loading support. */
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
@@ -37,6 +39,7 @@ export interface ButtonProps
   loading?: boolean;
 }
 
+/** Primary action button with variant support. Built on Radix UI Slot for as-child composition. */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, loading, children, disabled, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';

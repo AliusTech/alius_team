@@ -2,6 +2,7 @@ import * as React from 'react';
 import { DotLottieReact, type DotLottie } from '@lottiefiles/dotlottie-react';
 import { cn } from '@/shared/utils/cn';
 
+/** Props for the LottiePlayer component. */
 export interface LottiePlayerProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
@@ -13,6 +14,7 @@ export interface LottiePlayerProps {
   ariaLabel?: string;
 }
 
+/** Lottie animation renderer with reduced-motion support and completion callback. */
 const LottiePlayer = React.forwardRef<HTMLDivElement, LottiePlayerProps>(
   ({ data, loop = true, autoplay = true, speed = 1, className, onComplete, ariaLabel }, ref) => {
     const prefersReducedMotion = React.useMemo(

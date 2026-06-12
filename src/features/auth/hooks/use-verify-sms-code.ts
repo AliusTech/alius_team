@@ -4,6 +4,7 @@ import { authAPI } from '@/data/api-client/auth-api';
 import { useSessionStore } from '@/stores/session-store';
 import { ROUTES } from '@/shared/constants/routes';
 
+/** Hook to verify an SMS code and establish a user session. */
 export function useVerifySMSCode() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

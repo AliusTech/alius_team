@@ -10,6 +10,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/des
 import { ChartContainer, ChartTooltip } from '@/design-system/primitives/chart';
 import { taskTrendData } from '@/shared/mocks/dashboard-data';
 
+/** Area chart showing task and token usage trends over time. */
 export function TaskTrendChart() {
   const { t } = useTranslation('dashboard');
 

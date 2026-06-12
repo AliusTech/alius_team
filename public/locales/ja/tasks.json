@@ -8,5 +8,7 @@
     "running": "実行中",
     "completed": "完了",
     "error": "エラー"
-  }
+  },
+  "empty": "タスクがありません",
+  "emptyDesc": "右上のボタンからタスクを追加"
 }

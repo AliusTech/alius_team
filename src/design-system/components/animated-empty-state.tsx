@@ -19,6 +19,7 @@ const sizeMap = {
   lg: 'w-44 h-44',
 } as const;
 
+/** Props for the AnimatedEmptyState component. */
 interface AnimatedEmptyStateProps {
   illustration: IllustrationType;
   title: string;
@@ -28,6 +29,7 @@ interface AnimatedEmptyStateProps {
   className?: string;
 }
 
+/** Empty-state placeholder with a Lottie animation, title, description, and optional action. */
 export function AnimatedEmptyState({
   illustration,
   title,
@@ -42,7 +44,7 @@ export function AnimatedEmptyState({
   return (
     <div className={cn('flex flex-col items-center justify-center py-12 text-center', className)}>
       <div className={cn(sizeMap[size], 'mb-4')}>
-        <LottiePlayer data={data} loop autoplay />
+        <LottiePlayer data={data} loop={false} autoplay={false} />
       </div>
       <h3 className="text-lg font-semibold">{title}</h3>
       {description && (

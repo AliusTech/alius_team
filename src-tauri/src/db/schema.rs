@@ -1,9 +1,10 @@
 use rusqlite::Connection;
 
+/// Creates all database tables if they do not already exist.
 pub fn create_tables(conn: &Connection) -> Result<(), String> {
     conn.execute_batch(
         r#"
-        -- sessions 表（存储用户会话，单例模式）
+        -- sessions table (stores the active user session, singleton pattern)
         CREATE TABLE IF NOT EXISTS sessions (
             id INTEGER PRIMARY KEY CHECK (id = 1),
             access_token TEXT NOT NULL,
@@ -18,7 +19,7 @@ pub fn create_tables(conn: &Connection) -> Result<(), String> {
             updated_at INTEGER NOT NULL
         );
 
-        -- agents 表（缓存 API 返回的 agent 列表）
+        -- agents table (caches the agent list returned by the API)
         CREATE TABLE IF NOT EXISTS agents (
             agent_id TEXT PRIMARY KEY,
             node_id TEXT NOT NULL,
@@ -39,13 +40,13 @@ pub fn create_tables(conn: &Connection) -> Result<(), String> {
             updated_at INTEGER NOT NULL
         );
 
-        -- 缓存元数据表（跟踪缓存更新时间）
+        -- cache metadata table (tracks cache update timestamps)
         CREATE TABLE IF NOT EXISTS cache_meta (
             key TEXT PRIMARY KEY,
             updated_at INTEGER NOT NULL
         );
 
-        -- notifications 表（持久化收到的推送通知）
+        -- notifications table (persists received push notifications)
         CREATE TABLE IF NOT EXISTS notifications (
             id TEXT PRIMARY KEY,
             title TEXT NOT NULL,

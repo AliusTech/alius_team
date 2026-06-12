@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { authAPI } from '@/data/api-client/auth-api';
 
+/** Hook to send an SMS verification code with a 60-second resend countdown. */
 export function useSendSMSCode() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

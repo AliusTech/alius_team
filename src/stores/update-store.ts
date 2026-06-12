@@ -1,11 +1,13 @@
 import { create } from 'zustand';
 
+/** Metadata about an available application update. */
 export interface UpdateInfo {
   version: string;
   date?: string;
   body?: string;
 }
 
+/** Lifecycle stages of an application update check or download. */
 export type UpdateStatus =
   | 'idle'
   | 'checking'
@@ -30,6 +32,7 @@ interface UpdateState {
   reset: () => void;
 }
 
+/** Application update state — tracks available updates and download progress. */
 export const useUpdateStore = create<UpdateState>((set) => ({
   status: 'idle',
   updateInfo: null,

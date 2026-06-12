@@ -19,6 +19,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   ScrollText,
 };
 
+/** Slide-out drawer navigation for phone layout, shown over a backdrop. */
 export function DrawerNavigation() {
   const { t } = useTranslation('common');
   const location = useLocation();

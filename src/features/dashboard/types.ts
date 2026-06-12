@@ -1,9 +1,11 @@
+/** Aggregated dashboard data combining agent, task, and token usage summaries. */
 export interface DashboardSummary {
   agents: AgentSummary;
   tasks: TaskSummary;
   tokenUsage: TokenUsageSummary;
 }
 
+/** Counts of agents by status category. */
 export interface AgentSummary {
   online: number;
   working: number;
@@ -12,6 +14,7 @@ export interface AgentSummary {
   offline: number;
 }
 
+/** Counts of tasks by status category. */
 export interface TaskSummary {
   running: number;
   waitingApproval: number;
@@ -19,12 +22,14 @@ export interface TaskSummary {
   completed: number;
 }
 
+/** Token consumption stats for today and this month. */
 export interface TokenUsageSummary {
   today: number;
   thisMonth: number;
   estimatedCost: number;
 }
 
+/** A recent lifecycle event from an agent. */
 export interface RecentAgentEvent {
   id: string;
   agentId: string;
@@ -34,6 +39,7 @@ export interface RecentAgentEvent {
   details?: string;
 }
 
+/** Types of agent lifecycle events. */
 export type AgentEventType =
   | 'connected'
   | 'disconnected'
@@ -42,6 +48,7 @@ export type AgentEventType =
   | 'task_completed'
   | 'task_failed';
 
+/** A recent error or critical log entry. */
 export interface RecentErrorLog {
   id: string;
   agentId?: string;

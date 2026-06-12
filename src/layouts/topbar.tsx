@@ -4,6 +4,7 @@ import { useLayoutStore } from '@/stores/layout-store';
 import { useNotificationStore } from '@/stores/notification-store';
 import { cn } from '@/shared/utils/cn';
 
+/** Phone-sized top bar with app title, notification bell, and inspector toggle. */
 export function Topbar() {
   const { t } = useTranslation('common');
   const { inspectorCollapsed, toggleInspector, setBottomSheetOpen, setNotificationsDialogOpen } = useLayoutStore();

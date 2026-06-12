@@ -5,6 +5,7 @@ import type {
   User,
 } from '@/features/auth/types';
 
+/** Authentication API methods for SMS, Apple, and WeChat login flows. */
 export const authAPI = {
   sendSMSCode: async (phone: string): Promise<void> => {
     await httpClient(API_ENDPOINTS.AUTH.SEND_SMS_CODE, {

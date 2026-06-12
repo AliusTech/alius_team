@@ -1,5 +1,6 @@
 import { cn } from '@/shared/utils/cn';
 
+/** Props for the EmptyState component. */
 interface EmptyStateProps {
   icon?: React.ReactNode;
   title: string;
@@ -8,6 +9,7 @@ interface EmptyStateProps {
   className?: string;
 }
 
+/** Centered placeholder for sections with no content, with optional icon and action. */
 export function EmptyState({ icon, title, description, action, className }: EmptyStateProps) {
   return (
     <div className={cn('flex flex-col items-center justify-center py-12 text-center', className)}>

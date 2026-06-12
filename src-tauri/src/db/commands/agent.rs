@@ -4,6 +4,7 @@ use chrono::Utc;
 use rusqlite::{params, Connection, OptionalExtension};
 use tauri::State;
 
+/// Replaces all stored agents with the provided list and updates cache metadata.
 pub fn save_agents_inner(conn: &Connection, agents: &[AgentData]) -> Result<(), String> {
     let now = Utc::now().timestamp_millis();
 
@@ -52,6 +53,7 @@ pub fn save_agents_inner(conn: &Connection, agents: &[AgentData]) -> Result<(), 
     Ok(())
 }
 
+/// Returns all cached agents ordered by last update time.
 pub fn get_agents_inner(conn: &Connection) -> Result<Vec<AgentData>, String> {
     let mut stmt = conn
         .prepare(
@@ -94,6 +96,27 @@ pub fn get_agents_inner(conn: &Connection) -> Result<Vec<AgentData>, String> {
     Ok(agents)
 }
 
+/// Deletes a single agent by ID.
+pub fn delete_agent_inner(conn: &Connection, agent_id: &str) -> Result<(), String> {
+    conn.execute("DELETE FROM agents WHERE agent_id = ?1", params![agent_id])
+        .map_err(|e| format!("Failed to delete agent {}: {}", agent_id, e))?;
+    Ok(())
+}
+
+/// Deletes multiple agents by ID. Returns the number of deleted rows.
+pub fn delete_agents_batch_inner(conn: &Connection, agent_ids: &[String]) -> Result<usize, String> {
+    if agent_ids.is_empty() {
+        return Ok(0);
+    }
+    let placeholders: Vec<String> = agent_ids.iter().enumerate().map(|(i, _)| format!("?{}", i + 1)).collect();
+    let sql = format!("DELETE FROM agents WHERE agent_id IN ({})", placeholders.join(", "));
+    let params: Vec<&dyn rusqlite::ToSql> = agent_ids.iter().map(|id| id as &dyn rusqlite::ToSql).collect();
+    let count = conn.execute(&sql, params.as_slice())
+        .map_err(|e| format!("Failed to batch delete agents: {}", e))?;
+    Ok(count)
+}
+
+/// Removes all agents and their cache metadata.
 pub fn clear_agents_inner(conn: &Connection) -> Result<(), String> {
     conn.execute("DELETE FROM agents", [])
         .map_err(|e| format!("Failed to clear agents: {}", e))?;
@@ -102,6 +125,7 @@ pub fn clear_agents_inner(conn: &Connection) -> Result<(), String> {
     Ok(())
 }
 
+/// Returns the timestamp of the last agents cache update, if any.
 pub fn get_agents_cache_time_inner(conn: &Connection) -> Result<Option<i64>, String> {
     let result: Option<i64> = conn
         .query_row(
@@ -115,24 +139,42 @@ pub fn get_agents_cache_time_inner(conn: &Connection) -> Result<Option<i64>, Str
     Ok(result)
 }
 
+/// Replaces all cached agents with the provided list.
 #[tauri::command]
 pub fn save_agents(db: State<DbState>, agents: Vec<AgentData>) -> Result<(), String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     save_agents_inner(&conn, &agents)
 }
 
+/// Returns all cached agents.
 #[tauri::command]
 pub fn get_agents(db: State<DbState>) -> Result<Vec<AgentData>, String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     get_agents_inner(&conn)
 }
 
+/// Removes all cached agents and resets the cache timestamp.
 #[tauri::command]
 pub fn clear_agents(db: State<DbState>) -> Result<(), String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     clear_agents_inner(&conn)
 }
 
+/// Deletes a single agent by ID.
+#[tauri::command]
+pub fn delete_agent(db: State<DbState>, agent_id: String) -> Result<(), String> {
+    let conn = db.0.lock().map_err(|e| e.to_string())?;
+    delete_agent_inner(&conn, &agent_id)
+}
+
+/// Deletes multiple agents by their IDs.
+#[tauri::command]
+pub fn delete_agents_batch(db: State<DbState>, agent_ids: Vec<String>) -> Result<usize, String> {
+    let conn = db.0.lock().map_err(|e| e.to_string())?;
+    delete_agents_batch_inner(&conn, &agent_ids)
+}
+
+/// Returns the timestamp when the agent cache was last updated.
 #[tauri::command]
 pub fn get_agents_cache_time(db: State<DbState>) -> Result<Option<i64>, String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
@@ -293,5 +335,43 @@ mod tests {
         let t = get_agents_cache_time_inner(&conn).unwrap();
         assert!(t.is_some());
         assert!(t.unwrap() > 0);
+    }
+
+    #[test]
+    fn delete_removes_single_agent() {
+        let conn = setup_db();
+        save_agents_inner(&conn, &[sample_agent("a1", 100), sample_agent("a2", 200)]).unwrap();
+        delete_agent_inner(&conn, "a1").unwrap();
+        let got = get_agents_inner(&conn).unwrap();
+        assert_eq!(got.len(), 1);
+        assert_eq!(got[0].agent_id, "a2");
+    }
+
+    #[test]
+    fn delete_nonexistent_is_noop() {
+        let conn = setup_db();
+        save_agents_inner(&conn, &[sample_agent("a1", 100)]).unwrap();
+        delete_agent_inner(&conn, "unknown").unwrap();
+        assert_eq!(get_agents_inner(&conn).unwrap().len(), 1);
+    }
+
+    #[test]
+    fn batch_delete_removes_multiple() {
+        let conn = setup_db();
+        save_agents_inner(&conn, &[sample_agent("a1", 100), sample_agent("a2", 200), sample_agent("a3", 300)]).unwrap();
+        let count = delete_agents_batch_inner(&conn, &["a1".to_string(), "a3".to_string()]).unwrap();
+        assert_eq!(count, 2);
+        let got = get_agents_inner(&conn).unwrap();
+        assert_eq!(got.len(), 1);
+        assert_eq!(got[0].agent_id, "a2");
+    }
+
+    #[test]
+    fn batch_delete_empty_is_noop() {
+        let conn = setup_db();
+        save_agents_inner(&conn, &[sample_agent("a1", 100)]).unwrap();
+        let count = delete_agents_batch_inner(&conn, &[]).unwrap();
+        assert_eq!(count, 0);
+        assert_eq!(get_agents_inner(&conn).unwrap().len(), 1);
     }
 }

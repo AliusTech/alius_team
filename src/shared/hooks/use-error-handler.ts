@@ -3,6 +3,7 @@ import { HTTPClientError } from '@/data/api-client/http-client';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/shared/constants/routes';
 
+/** Optional callbacks for specific HTTP error categories. */
 interface UseErrorHandlerOptions {
   onAuthError?: (error: HTTPClientError) => void;
   onNetworkError?: (error: HTTPClientError) => void;
@@ -10,6 +11,7 @@ interface UseErrorHandlerOptions {
   onGenericError?: (error: HTTPClientError) => void;
 }
 
+/** Centralized error handling hook — classifies HTTP errors and routes them to appropriate callbacks or defaults. */
 export function useErrorHandler(options?: UseErrorHandlerOptions) {
   const navigate = useNavigate();
 

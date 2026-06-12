@@ -20,7 +20,13 @@
     "about": "About Alius",
     "aboutDesc": "Version info, open source licenses, contact",
     "checkUpdate": "Check for Updates",
-    "checkUpdateDesc": "Check if a newer version is available"
+    "checkUpdateDesc": "Check if a newer version is available",
+    "teamName": "Team Name",
+    "teamNameDesc": "Displayed as the dashboard title",
+    "teamNamePlaceholder": "Enter team name",
+    "adminName": "Admin Name",
+    "adminNameDesc": "Team administrator name",
+    "adminNamePlaceholder": "Enter admin name"
   },
   "language": {
     "title": "Language",

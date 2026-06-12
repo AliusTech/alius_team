@@ -5,10 +5,12 @@ import {
 } from 'recharts';
 import { cn } from '@/shared/utils/cn';
 
+/** Props for the ChartContainer component. */
 interface ChartContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement;
 }
 
+/** Responsive wrapper that scales a Recharts chart to fill its parent. */
 function ChartContainer({ children, className, ...props }: ChartContainerProps) {
   return (
     <div className={cn('w-full h-full', className)} {...props}>
@@ -19,6 +21,7 @@ function ChartContainer({ children, className, ...props }: ChartContainerProps) 
   );
 }
 
+/** Props for the ChartTooltipContent component. */
 interface ChartTooltipContentProps {
   active?: boolean;
   payload?: Array<{
@@ -29,6 +32,7 @@ interface ChartTooltipContentProps {
   label?: string;
 }
 
+/** Styled tooltip body that renders chart data point name, value, and color swatch. */
 function ChartTooltipContent({ active, payload, label }: ChartTooltipContentProps) {
   if (!active || !payload?.length) return null;
 
@@ -51,6 +55,7 @@ function ChartTooltipContent({ active, payload, label }: ChartTooltipContentProp
   );
 }
 
+/** Recharts Tooltip wrapper pre-wired with ChartTooltipContent and subtle cursor highlight. */
 function ChartTooltip(props: React.ComponentProps<typeof Tooltip>) {
   return (
     <Tooltip

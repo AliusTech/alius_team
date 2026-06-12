@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+/** Manages UI layout state: sidebar, inspector, drawers, dialogs, and bottom sheet. */
 export interface LayoutState {
   // Sidebar state
   sidebarCollapsed: boolean;
@@ -36,9 +37,11 @@ export interface LayoutState {
 
 const DEFAULT_SIDEBAR_WIDTH = 220;
 const DEFAULT_SIDEBAR_COLLAPSED_WIDTH = 56;
+/** Width reserved for the collapsed sidebar icon rail. */
 export const SIDEBAR_RAIL_WIDTH = 72;
 const DEFAULT_INSPECTOR_WIDTH = 360;
 
+/** Zustand store hook for reading and mutating layout state (persisted to localStorage). */
 export const useLayoutStore = create<LayoutState>()(
   persist(
     (set) => ({

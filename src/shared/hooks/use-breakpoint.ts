@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { type DeviceType, type BreakpointInfo, BREAKPOINTS } from '@/shared/constants/breakpoints';
 
+/** Reactive hook that returns the current device type and derived sidebar/inspector visibility flags. */
 export function useBreakpoint(): BreakpointInfo {
   const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
 

@@ -7,7 +7,9 @@ import { useVerifySMSCode } from '../hooks/use-verify-sms-code';
 import { useSendSMSCode } from '../hooks/use-send-sms-code';
 import { ROUTES } from '@/shared/constants/routes';
 import { cn } from '@/shared/utils/cn';
+import { AnimatedIllustration } from '@/design-system/components/animated-illustration';
 
+/** SMS verification code entry page with auto-submit and resend support. */
 export function SMSCodePage() {
   const { t } = useTranslation('auth');
   const location = useLocation();
@@ -16,6 +18,7 @@ export function SMSCodePage() {
 
   const [code, setCode] = useState(['', '', '', '', '', '']);
   const [codeError, setCodeError] = useState<string | null>(null);
+  const [showSuccess, setShowSuccess] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const { verifyCode, isLoading, error } = useVerifySMSCode();
@@ -91,8 +94,10 @@ export function SMSCodePage() {
     setCodeError(null);
     const success = await verifyCode(phone, finalCode);
 
-    if (!success) {
-      // Clear code on error
+    if (success) {
+      setShowSuccess(true);
+      setTimeout(() => navigate(ROUTES.DASHBOARD), 1200);
+    } else {
       setCode(['', '', '', '', '', '']);
       inputRefs.current[0]?.focus();
     }
@@ -107,6 +112,18 @@ export function SMSCodePage() {
   const handleBack = () => {
     navigate(ROUTES.LOGIN);
   };
+
+  if (showSuccess) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted">
+        <AnimatedIllustration
+          name="sms-success"
+          size="lg"
+          loop={false}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">

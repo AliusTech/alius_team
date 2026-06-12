@@ -7,7 +7,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/des
 import { useSendSMSCode } from '../hooks/use-send-sms-code';
 import { useSessionStore } from '@/stores/session-store';
 import { ROUTES } from '@/shared/constants/routes';
+import { AnimatedIllustration } from '@/design-system/components/animated-illustration';
 
+/** Phone-number login page that sends an SMS verification code. */
 export function LoginPage() {
   const { t } = useTranslation('auth');
   const [phone, setPhone] = useState('');
@@ -68,7 +70,10 @@ export function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-background to-muted p-4">
+      <div className="mb-6">
+        <AnimatedIllustration name="login-hero" size="lg" />
+      </div>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">{t('login.title')}</CardTitle>

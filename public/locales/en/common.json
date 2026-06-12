@@ -93,5 +93,25 @@
   "app": {
     "name": "Alius",
     "loading": "Loading..."
+  },
+  "loadingMore": "Loading…",
+  "noMore": "No more data",
+  "deletion": {
+    "deleteOne": "Delete",
+    "deleteSelected": "Delete selected ({{count}})",
+    "confirmTitle": "Confirm delete",
+    "confirmMessage": "Are you sure you want to delete {{count}} items?",
+    "confirmMessageOne": "Are you sure you want to delete \"{{name}}\"?",
+    "confirmAction": "Delete",
+    "cancelAction": "Cancel",
+    "selectAll": "Select all",
+    "enterSelectMode": "Select",
+    "exitSelectMode": "Cancel",
+    "deleted": "Deleted {{count}} items",
+    "undo": "Undo",
+    "deleteFailed": "Delete failed",
+    "selectedCount": "{{count}} selected",
+    "selectItem": "Select",
+    "deselectItem": "Deselect"
   }
 }

@@ -1,4 +1,4 @@
-// 数据库中的 Session 结构（与 Rust 端对应）
+/** Database representation of a session (mirrors Rust side). */
 export interface DbSession {
   access_token: string;
   refresh_token: string;
@@ -6,6 +6,7 @@ export interface DbSession {
   user: DbUser;
 }
 
+/** Database representation of a user. */
 export interface DbUser {
   id: string;
   phone: string;
@@ -14,7 +15,7 @@ export interface DbUser {
   avatar?: string;
 }
 
-// 数据库中的 Agent 结构（与 Rust 端对应）
+/** Database representation of an agent (mirrors Rust side). */
 export interface DbAgent {
   agent_id: string;
   node_id: string;

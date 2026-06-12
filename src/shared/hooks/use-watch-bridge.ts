@@ -15,6 +15,7 @@ interface WatchDashboard {
 
 type WatchActionHandler = (message: WatchActionMessage) => void;
 
+/** Two-way bridge to a companion watch app — sends dashboard data and receives action commands. */
 export function useWatchBridge() {
   const handlerRef = useRef<WatchActionHandler | null>(null);
 

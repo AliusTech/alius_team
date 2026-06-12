@@ -4,10 +4,12 @@ import { ROUTES } from '@/shared/constants/routes';
 
 const DEV_BYPASS = import.meta.env.DEV;
 
+/** Props for the AuthGuard component. */
 interface AuthGuardProps {
   children: React.ReactNode;
 }
 
+/** Protects child routes by redirecting unauthenticated users to the login page. */
 export function AuthGuard({ children }: AuthGuardProps) {
   const { isAuthenticated } = useSessionStore();
   const location = useLocation();

@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import { Card } from '@/design-system/primitives/card';
 
+/** Props for the StatCard component. */
 interface StatCardProps {
   title: string;
   value: string | number;
@@ -10,6 +11,7 @@ interface StatCardProps {
   className?: string;
 }
 
+/** Summary metric card displaying a title, value, optional subtitle, and icon. */
 export function StatCard({ title, value, subtitle, icon: Icon, iconBgColor = '#e0ebff', className }: StatCardProps) {
   return (
     <Card className={className}>

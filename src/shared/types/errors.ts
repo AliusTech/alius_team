@@ -1,5 +1,6 @@
 // 统一错误类型定义
 
+/** Union of all application-wide error codes. */
 export type ErrorCode =
   // 认证相关
   | 'AUTH_INVALID_PHONE'
@@ -58,6 +59,7 @@ export type ErrorCode =
   | 'CLIENT_NOT_FOUND'
   | 'CLIENT_RATE_LIMITED';
 
+/** Structured error payload returned by the API. */
 export interface APIError {
   code: ErrorCode;
   message: string;
@@ -67,11 +69,13 @@ export interface APIError {
   requestId?: string;
 }
 
+/** Top-level error response wrapper from the API. */
 export interface ErrorResponse {
   error: APIError;
 }
 
 // 错误消息映射
+/** Human-readable default messages mapped to each error code. */
 export const ERROR_MESSAGES: Record<ErrorCode, string> = {
   // 认证相关
   AUTH_INVALID_PHONE: '请输入正确的手机号',
@@ -132,6 +136,7 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
 };
 
 // 获取错误消息
+/** Looks up the default message for an error code, falling back to the provided string. */
 export function getErrorMessage(code: ErrorCode, fallback?: string): string {
   return ERROR_MESSAGES[code] || fallback || '未知错误';
 }

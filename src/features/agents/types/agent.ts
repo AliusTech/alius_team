@@ -1,3 +1,4 @@
+/** Operational status of an agent. */
 export type AgentStatus =
   | 'idle'
   | 'working'
@@ -7,12 +8,14 @@ export type AgentStatus =
   | 'completed'
   | 'offline';
 
+/** Connection status between the app and an agent. */
 export type ConnectionStatus =
   | 'connected'
   | 'disconnected'
   | 'pending'
   | 'reconnecting';
 
+/** Full agent entity with identity, status, and usage metadata. */
 export interface Agent {
   agentId: string;
   nodeId: string;
@@ -33,6 +36,7 @@ export interface Agent {
   updatedAt: string;
 }
 
+/** An agent connection record including claim and expiration info. */
 export interface AgentConnection {
   connectionId: string;
   code: string;
@@ -42,6 +46,7 @@ export interface AgentConnection {
   claimedAgent?: ClaimedAgentInfo;
 }
 
+/** Lifecycle status of an agent connection. */
 export type AgentConnectionStatus =
   | 'created'
   | 'waiting_for_agent'
@@ -56,6 +61,7 @@ export type AgentConnectionStatus =
   | 'already_used'
   | 'rate_limited';
 
+/** Information about an agent that has claimed a connection code. */
 export interface ClaimedAgentInfo {
   name: string;
   role: string;
@@ -67,6 +73,7 @@ export interface ClaimedAgentInfo {
   tools?: string[];
 }
 
+/** Response after creating a new connection code. */
 export interface CreateConnectionCodeResponse {
   connectionId: string;
   code: string;
@@ -74,6 +81,7 @@ export interface CreateConnectionCodeResponse {
   expiresIn: number;
 }
 
+/** Current connection status response for an agent. */
 export interface AgentConnectionStatusResponse {
   agentId: string;
   connectionId: string;
@@ -83,7 +91,7 @@ export interface AgentConnectionStatusResponse {
   reconnectAttempts?: number;
 }
 
-// Agent 间通信
+/** A message sent between agents. */
 export interface AgentMessage {
   messageId: string;
   fromAgentId: string;
@@ -95,6 +103,7 @@ export interface AgentMessage {
   deliveredAt?: string;
 }
 
+/** Request payload for sending a direct message to an agent. */
 export interface SendMessageRequest {
   toAgentId: string;
   messageType: string;
@@ -102,6 +111,7 @@ export interface SendMessageRequest {
   priority?: 'high' | 'normal' | 'low';
 }
 
+/** Request payload for broadcasting a message to multiple agents. */
 export interface BroadcastMessageRequest {
   messageType: string;
   payload: unknown;
@@ -110,7 +120,7 @@ export interface BroadcastMessageRequest {
   excludeAgentIds?: string[];
 }
 
-// Agent 发现
+/** Request payload for discovering agents by filters. */
 export interface DiscoverAgentsRequest {
   status?: AgentStatus[];
   roles?: string[];
@@ -120,6 +130,7 @@ export interface DiscoverAgentsRequest {
   offset?: number;
 }
 
+/** Capability profile of an agent including tools and supported models. */
 export interface AgentCapability {
   agentId: string;
   capabilities: string[];
@@ -129,12 +140,13 @@ export interface AgentCapability {
   supportedLanguages?: string[];
 }
 
-// Agent 操作请求
+/** Request payload for connecting an agent via a connection code. */
 export interface ConnectAgentRequest {
   connectionCode: string;
   agentInfo: ClaimedAgentInfo;
 }
 
+/** Request payload for disconnecting an agent. */
 export interface DisconnectAgentRequest {
   reason?: string;
   notifyOthers?: boolean;

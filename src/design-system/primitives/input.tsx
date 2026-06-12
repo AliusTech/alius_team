@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { cn } from '@/shared/utils/cn';
 
+/** Props for the Input component, extending native input attributes with error display. */
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
+/** Styled text input with optional error message display. */
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, error, ...props }, ref) => {
     return (

@@ -4,6 +4,7 @@ use chrono::Utc;
 use rusqlite::{params, Connection};
 use tauri::State;
 
+/// Inserts or replaces a notification record.
 pub fn save_notification_inner(conn: &Connection, n: &NotificationData) -> Result<(), String> {
     conn.execute(
         r#"
@@ -28,6 +29,7 @@ pub fn save_notification_inner(conn: &Connection, n: &NotificationData) -> Resul
     Ok(())
 }
 
+/// Returns notifications ordered by creation time, newest first.
 pub fn get_notifications_inner(
     conn: &Connection,
     limit: i64,
@@ -67,6 +69,7 @@ pub fn get_notifications_inner(
     Ok(items)
 }
 
+/// Marks a single notification as read.
 pub fn mark_read_inner(conn: &Connection, id: &str) -> Result<(), String> {
     conn.execute(
         "UPDATE notifications SET is_read = 1 WHERE id = ?1",
@@ -76,24 +79,28 @@ pub fn mark_read_inner(conn: &Connection, id: &str) -> Result<(), String> {
     Ok(())
 }
 
+/// Marks all notifications as read.
 pub fn mark_all_read_inner(conn: &Connection) -> Result<(), String> {
     conn.execute("UPDATE notifications SET is_read = 1", [])
         .map_err(|e| format!("Failed to mark all read: {}", e))?;
     Ok(())
 }
 
+/// Deletes a single notification by ID.
 pub fn delete_notification_inner(conn: &Connection, id: &str) -> Result<(), String> {
     conn.execute("DELETE FROM notifications WHERE id = ?1", params![id])
         .map_err(|e| format!("Failed to delete notification: {}", e))?;
     Ok(())
 }
 
+/// Deletes all notifications.
 pub fn clear_all_inner(conn: &Connection) -> Result<(), String> {
     conn.execute("DELETE FROM notifications", [])
         .map_err(|e| format!("Failed to clear notifications: {}", e))?;
     Ok(())
 }
 
+/// Returns the count of unread notifications.
 pub fn get_unread_count_inner(conn: &Connection) -> Result<i64, String> {
     let count: i64 = conn
         .query_row(
@@ -105,12 +112,14 @@ pub fn get_unread_count_inner(conn: &Connection) -> Result<i64, String> {
     Ok(count)
 }
 
+/// Persists a notification received from the push service.
 #[tauri::command]
 pub fn save_notification(db: State<DbState>, notification: NotificationData) -> Result<(), String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     save_notification_inner(&conn, &notification)
 }
 
+/// Returns paginated notifications, optionally filtered to unread only.
 #[tauri::command]
 pub fn get_notifications(
     db: State<DbState>,
@@ -122,30 +131,35 @@ pub fn get_notifications(
     get_notifications_inner(&conn, limit.unwrap_or(50), offset.unwrap_or(0), unread_only.unwrap_or(false))
 }
 
+/// Marks a notification as read by ID.
 #[tauri::command]
 pub fn mark_notification_read(db: State<DbState>, id: String) -> Result<(), String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     mark_read_inner(&conn, &id)
 }
 
+/// Marks all notifications as read.
 #[tauri::command]
 pub fn mark_all_notifications_read(db: State<DbState>) -> Result<(), String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     mark_all_read_inner(&conn)
 }
 
+/// Deletes a notification by ID.
 #[tauri::command]
 pub fn delete_notification(db: State<DbState>, id: String) -> Result<(), String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     delete_notification_inner(&conn, &id)
 }
 
+/// Deletes all stored notifications.
 #[tauri::command]
 pub fn clear_all_notifications(db: State<DbState>) -> Result<(), String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     clear_all_inner(&conn)
 }
 
+/// Returns the number of unread notifications.
 #[tauri::command]
 pub fn get_unread_notification_count(db: State<DbState>) -> Result<i64, String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;

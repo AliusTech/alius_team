@@ -1,6 +1,9 @@
+/** Notification category types. */
 export type NotificationCategory = 'task' | 'agent' | 'system';
+/** Notification priority levels. */
 export type NotificationPriority = 'normal' | 'high';
 
+/** Push notification received via WebSocket. */
 export interface PushNotification {
   id: string;
   title: string;
@@ -13,6 +16,7 @@ export interface PushNotification {
   received_at?: number;
 }
 
+/** Discriminated union of all possible WebSocket push messages. */
 export type PushMessage =
   | { type: 'notification'; data: PushNotification }
   | { type: 'ping' };

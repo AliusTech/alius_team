@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AlertTriangle, Users, Layers, Repeat } from 'lucide-react';
 import type { AgentTemplate } from '@/shared/mocks/agent-templates';
 import type { TaskFormData } from './configure-team-step';
+import { LoadingOverlay } from '@/design-system/components/loading-overlay';
 
 interface ConfirmLaunchStepProps {
   selectedAgents: AgentTemplate[];
@@ -10,6 +12,7 @@ interface ConfirmLaunchStepProps {
   onBack: () => void;
 }
 
+/** Step 3 of the agent selection flow: review task configuration and launch. */
 export function ConfirmLaunchStep({
   selectedAgents,
   formData,
@@ -17,12 +20,22 @@ export function ConfirmLaunchStep({
   onBack,
 }: ConfirmLaunchStepProps) {
   const { t } = useTranslation(['agents', 'common']);
+  const [isLaunching, setIsLaunching] = useState(false);
 
   const priorityKey = `confirm.priority${formData.priority.charAt(0).toUpperCase()}${formData.priority.slice(1)}` as const;
   const modeKey = `confirm.mode${formData.executionMode.charAt(0).toUpperCase()}${formData.executionMode.slice(1)}` as const;
 
+  const handleLaunch = () => {
+    setIsLaunching(true);
+    setTimeout(() => {
+      setIsLaunching(false);
+      onLaunch();
+    }, 1500);
+  };
+
   return (
     <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
+      <LoadingOverlay visible={isLaunching} message={t('agents:confirm.launching', '正在启动任务...')} />
       {/* Task summary card */}
       <div className="rounded-[11px] border border-border bg-card p-4 space-y-3">
         <div className="flex items-start justify-between">
@@ -118,8 +131,9 @@ export function ConfirmLaunchStep({
         </div>
         <button
           type="button"
-          onClick={onLaunch}
-          className="h-8 px-5 rounded-[7px] text-[12px] font-medium bg-[#2d6ff2] text-white hover:bg-[#2563eb] transition-colors"
+          onClick={handleLaunch}
+          disabled={isLaunching}
+          className="h-8 px-5 rounded-[7px] text-[12px] font-medium bg-[#2d6ff2] text-white hover:bg-[#2563eb] transition-colors disabled:opacity-50"
         >
           {t('common:actions.launch')}
         </button>

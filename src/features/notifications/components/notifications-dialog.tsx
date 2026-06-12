@@ -7,12 +7,14 @@ import { useNotificationStore } from '@/stores/notification-store';
 import { useI18nStore } from '@/i18n/i18n-store';
 import type { PushNotification } from '@/data/realtime/types';
 import { NotificationItem } from './notification-item';
+import { AnimatedEmptyState } from '@/design-system/components/animated-empty-state';
 
 interface NotificationsDialogProps {
   open: boolean;
   onClose: () => void;
 }
 
+/** Full-screen dialog listing all notifications with mark-all-read and clear actions. */
 export function NotificationsDialog({ open, onClose }: NotificationsDialogProps) {
   const { t } = useTranslation('common');
   const { isPhone } = useBreakpoint();
@@ -47,7 +49,7 @@ export function NotificationsDialog({ open, onClose }: NotificationsDialogProps)
       <div
         className={cn(
           'relative bg-card border border-border rounded-[14px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] flex flex-col overflow-hidden',
-          isPhone ? 'inset-0 rounded-none' : 'w-[520px] max-h-[85vh]'
+          isPhone ? 'inset-0 rounded-none' : 'w-[900px] max-h-[85vh]'
         )}
       >
         <div className="flex items-center justify-between px-4 py-3 border-b border-border">
@@ -105,14 +107,12 @@ export function NotificationsDialog({ open, onClose }: NotificationsDialogProps)
             </div>
           </>
         ) : (
-          <div className="flex-1 flex flex-col items-center justify-center gap-3 p-8 min-h-[300px]">
-            <div className="size-12 rounded-full bg-muted flex items-center justify-center">
-              <Bell className="size-6 text-muted-foreground" />
-            </div>
-            <p className="text-sm text-muted-foreground">
-              {isLoading ? t('app.loading') : t('notifications.empty')}
-            </p>
-          </div>
+          <AnimatedEmptyState
+            illustration="no-notifications"
+            title={isLoading ? t('app.loading') : t('notifications.empty')}
+            size="sm"
+            className="min-h-[300px]"
+          />
         )}
       </div>
     </div>

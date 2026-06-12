@@ -93,5 +93,25 @@
   "app": {
     "name": "隐",
     "loading": "Loading..."
+  },
+  "loadingMore": "加载中…",
+  "noMore": "没有更多数据",
+  "deletion": {
+    "deleteOne": "删除",
+    "deleteSelected": "删除选中 ({{count}})",
+    "confirmTitle": "确认删除",
+    "confirmMessage": "确定要删除 {{count}} 个项目吗？",
+    "confirmMessageOne": "确定要删除「{{name}}」吗？",
+    "confirmAction": "删除",
+    "cancelAction": "取消",
+    "selectAll": "全选",
+    "enterSelectMode": "多选",
+    "exitSelectMode": "取消",
+    "deleted": "已删除 {{count}} 个项目",
+    "undo": "撤销",
+    "deleteFailed": "删除失败",
+    "selectedCount": "已选 {{count}} 项",
+    "selectItem": "选择",
+    "deselectItem": "取消选择"
   }
 }

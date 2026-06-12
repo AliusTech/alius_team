@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 
+/// Cached data for a single agent returned from the API.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AgentData {
     pub agent_id: String,

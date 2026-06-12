@@ -3,6 +3,7 @@ import { Minus, Plus, ArrowDown, ArrowRight, X } from 'lucide-react';
 import { cn } from '@/shared/utils/cn';
 import type { AgentTemplate } from '@/shared/mocks/agent-templates';
 
+/** Form data for creating a new task. */
 export interface TaskFormData {
   name: string;
   objective: string;
@@ -11,6 +12,7 @@ export interface TaskFormData {
   executionMode: 'sequential' | 'parallel';
 }
 
+/** Default values for the task creation form. */
 export const DEFAULT_FORM_DATA: TaskFormData = {
   name: '',
   objective: '',
@@ -34,6 +36,7 @@ const PRIORITIES = [
   { value: 'low' as const, labelKey: 'form.priorityLow', color: 'bg-[#22c55e] text-white' },
 ];
 
+/** Step 2 of the agent selection flow: configure task name, objective, priority, and execution mode. */
 export function ConfigureTeamStep({
   selectedAgents,
   onRemoveAgent,

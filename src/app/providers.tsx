@@ -8,6 +8,7 @@ import { useThemeEffect } from "@/shared/hooks/use-theme-effect";
 import { useUpdateCheck } from "@/shared/hooks/use-update-check";
 import { usePushConnection } from "@/shared/hooks/use-push-connection";
 import { UpdateDialog } from "@/features/settings/components/update-dialog";
+import { AnimatedIllustration } from "@/design-system/components/animated-illustration";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,6 +30,7 @@ function PushNotifications() {
   return null;
 }
 
+/** Global providers: React Query, i18n, theme, session, and notifications. */
 export function Providers({ children }: { children: React.ReactNode }) {
   useThemeEffect();
   const loadSession = useSessionStore((state) => state.loadSession);
@@ -53,8 +55,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   if (!isLoaded) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-background">
-        <div className="text-muted-foreground">Loading...</div>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-background gap-4">
+        <AnimatedIllustration name="splash" size="lg" />
       </div>
     );
   }

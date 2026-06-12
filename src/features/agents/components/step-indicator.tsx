@@ -1,4 +1,6 @@
 import { cn } from '@/shared/utils/cn';
+import { LottiePlayer } from '@/design-system/primitives/lottie-player';
+import { getAnimationData } from '@/assets/animations';
 
 interface StepIndicatorProps {
   steps: string[];
@@ -24,16 +26,30 @@ export function StepIndicator({ steps, currentStep }: StepIndicatorProps) {
               />
             )}
             <div className="flex items-center gap-1.5">
-              <div
-                className={cn(
-                  'w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-medium shrink-0',
-                  isActive && 'bg-primary text-primary-foreground',
-                  isCompleted && 'bg-primary text-primary-foreground',
-                  !isActive && !isCompleted && 'bg-muted text-muted-foreground'
-                )}
-              >
-                {stepNum}
-              </div>
+              {isCompleted ? (
+                <div className="w-5 h-5 shrink-0">
+                  <LottiePlayer
+                    data={getAnimationData('step-complete')}
+                    loop={false}
+                    autoplay
+                    speed={1.5}
+                  />
+                </div>
+              ) : isActive ? (
+                <div className="w-5 h-5 shrink-0">
+                  <LottiePlayer
+                    data={getAnimationData('step-active')}
+                    loop
+                    autoplay
+                  />
+                </div>
+              ) : (
+                <div
+                  className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-medium shrink-0 bg-muted text-muted-foreground"
+                >
+                  {stepNum}
+                </div>
+              )}
               <span
                 className={cn(
                   'text-xs whitespace-nowrap',

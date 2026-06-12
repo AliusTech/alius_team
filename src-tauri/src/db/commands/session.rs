@@ -4,6 +4,7 @@ use chrono::Utc;
 use rusqlite::{params, Connection, OptionalExtension};
 use tauri::State;
 
+/// Persists the session data, replacing any existing row.
 pub fn save_session_inner(conn: &Connection, session: &SessionData) -> Result<(), String> {
     let now = Utc::now().timestamp_millis();
 
@@ -37,6 +38,7 @@ pub fn save_session_inner(conn: &Connection, session: &SessionData) -> Result<()
     Ok(())
 }
 
+/// Returns the stored session, if any.
 pub fn get_session_inner(conn: &Connection) -> Result<Option<SessionData>, String> {
     let mut stmt = conn
         .prepare(
@@ -69,12 +71,14 @@ pub fn get_session_inner(conn: &Connection) -> Result<Option<SessionData>, Strin
     Ok(result)
 }
 
+/// Deletes the stored session.
 pub fn clear_session_inner(conn: &Connection) -> Result<(), String> {
     conn.execute("DELETE FROM sessions WHERE id = 1", [])
         .map_err(|e| format!("Failed to clear session: {}", e))?;
     Ok(())
 }
 
+/// Updates the access token and expiry for the current session.
 pub fn update_access_token_inner(
     conn: &Connection,
     access_token: &str,
@@ -91,24 +95,28 @@ pub fn update_access_token_inner(
     Ok(())
 }
 
+/// Persists the current user session.
 #[tauri::command]
 pub fn save_session(db: State<DbState>, session: SessionData) -> Result<(), String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     save_session_inner(&conn, &session)
 }
 
+/// Returns the stored session, if any.
 #[tauri::command]
 pub fn get_session(db: State<DbState>) -> Result<Option<SessionData>, String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     get_session_inner(&conn)
 }
 
+/// Deletes the stored session.
 #[tauri::command]
 pub fn clear_session(db: State<DbState>) -> Result<(), String> {
     let conn = db.0.lock().map_err(|e| e.to_string())?;
     clear_session_inner(&conn)
 }
 
+/// Updates the access token and expiry for the current session.
 #[tauri::command]
 pub fn update_access_token(
     db: State<DbState>,

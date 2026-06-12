@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { check } from '@tauri-apps/plugin-updater';
 import { useUpdateStore } from '@/stores/update-store';
 
+/** Checks for application updates once on mount and populates the update store. */
 export function useUpdateCheck() {
   const { setChecking, setAvailable, setUpToDate, setError } = useUpdateStore();
   const hasChecked = useRef(false);

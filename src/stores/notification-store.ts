@@ -9,6 +9,7 @@ import {
   getUnreadNotificationCount,
 } from '@/data/db/commands';
 
+/** Push notification state — tracks notifications, unread count, and dialog visibility. */
 export interface NotificationState {
   notifications: PushNotification[];
   unreadCount: number;
@@ -24,6 +25,7 @@ export interface NotificationState {
   clearAll: () => Promise<void>;
 }
 
+/** Zustand store hook for managing notifications with local DB persistence. */
 export const useNotificationStore = create<NotificationState>((set, get) => ({
   notifications: [],
   unreadCount: 0,

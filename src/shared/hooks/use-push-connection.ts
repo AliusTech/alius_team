@@ -5,6 +5,7 @@ import { useSessionStore } from '@/stores/session-store';
 import { useNotificationStore } from '@/stores/notification-store';
 import type { PushNotification } from '@/data/realtime/types';
 
+/** Starts the Tauri push client and relays incoming notifications to the notification store. */
 export function usePushConnection() {
   const isAuthenticated = useSessionStore((s) => s.isAuthenticated);
   const onReceived = useNotificationStore((s) => s.onReceived);

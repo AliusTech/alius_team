@@ -1,3 +1,5 @@
+//! Core application setup — registers plugins, initializes the database, and exposes Tauri commands.
+
 mod db;
 mod watch;
 mod push;
@@ -7,6 +9,7 @@ use db::DbState;
 use push::PushState;
 use tauri::Manager;
 
+/// Builds and launches the Tauri application with all plugins, state, and commands.
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -14,14 +17,14 @@ pub fn run() {
         .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_notification::init())
         .setup(|app| {
-            // 初始化数据库
+            // Initialize database
             let db = db::init_db(app.handle())?;
             app.manage(db);
 
-            // 推送客户端 state
+            // Push client state
             app.manage(PushState::new());
 
-            // 日志插件（仅 debug）
+            // Log plugin (debug only)
             if cfg!(debug_assertions) {
                 app.handle().plugin(
                     tauri_plugin_log::Builder::default()
@@ -39,6 +42,8 @@ pub fn run() {
             agent::save_agents,
             agent::get_agents,
             agent::clear_agents,
+            agent::delete_agent,
+            agent::delete_agents_batch,
             agent::get_agents_cache_time,
             notification::save_notification,
             notification::get_notifications,

@@ -10,6 +10,7 @@ async function setTauriTheme(isDark: boolean) {
   }
 }
 
+/** Resolves a theme mode to a boolean indicating dark mode, respecting system preference. */
 export function resolveIsDark(mode: 'light' | 'dark' | 'system'): boolean {
   return (
     mode === 'dark' ||
@@ -18,6 +19,7 @@ export function resolveIsDark(mode: 'light' | 'dark' | 'system'): boolean {
   );
 }
 
+/** Applies the active theme to the document root and Tauri window, re-running on mode or system preference change. */
 export function useThemeEffect() {
   const mode = useThemeStore((s) => s.mode);
 

@@ -26,6 +26,7 @@ function mapDetectedLocale(detected: string): string {
   return 'zh';
 }
 
+/** i18next configuration with HTTP backend for lazy-loaded locale files. */
 i18next
   .use(HttpBackend)
   .use({

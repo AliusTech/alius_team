@@ -9,6 +9,7 @@ interface SettingsDialogProps {
   onClose: () => void;
 }
 
+/** Modal dialog wrapping the SettingsPage with header and close button. */
 export function SettingsDialog({ open, onClose }: SettingsDialogProps) {
   const { t } = useTranslation('settings');
   const { isPhone } = useBreakpoint();

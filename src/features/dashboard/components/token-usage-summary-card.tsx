@@ -3,11 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/design-system/primitives/card';
 import type { TokenUsageSummary } from '../types';
 
+/** Props for the TokenUsageSummaryCard component. */
 interface TokenUsageSummaryCardProps {
   data: TokenUsageSummary | undefined;
   isLoading: boolean;
 }
 
+/** Card displaying token usage stats including today, monthly, and estimated cost. */
 export function TokenUsageSummaryCard({ data, isLoading }: TokenUsageSummaryCardProps) {
   const { t } = useTranslation('dashboard');
 

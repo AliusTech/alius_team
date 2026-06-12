@@ -2,12 +2,14 @@ import { cn } from '@/shared/utils/cn';
 import { Check } from 'lucide-react';
 import type { AgentTemplate } from '@/shared/mocks/agent-templates';
 
+/** Props for the AgentTemplateCard component. */
 interface AgentTemplateCardProps {
   agent: AgentTemplate;
   selected: boolean;
   onToggle: () => void;
 }
 
+/** Selectable card displaying an agent template with capabilities and tags. */
 export function AgentTemplateCard({ agent, selected, onToggle }: AgentTemplateCardProps) {
   return (
     <button

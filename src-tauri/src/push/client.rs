@@ -13,27 +13,32 @@ use tokio_tungstenite::{connect_async, tungstenite::Message};
 const RECONNECT_BASE_MS: u64 = 1000;
 const RECONNECT_MAX_MS: u64 = 30000;
 
+/// WebSocket message payload wrapping a notification.
 #[derive(Debug, Deserialize)]
 struct PushPayload {
     #[serde(flatten)]
     notification: NotificationData,
 }
 
+/// Manages a background WebSocket connection for push notifications.
 pub struct PushClient {
     handle: Arc<Mutex<Option<tokio::task::JoinHandle<()>>>>,
 }
 
 impl PushClient {
+    /// Creates a new client with no active connection.
     pub fn new() -> Self {
         Self {
             handle: Arc::new(Mutex::new(None)),
         }
     }
 
+    /// Returns `true` if the WebSocket connection task is alive.
     pub async fn is_running(&self) -> bool {
         self.handle.lock().await.is_some()
     }
 
+    /// Spawns the reconnecting WebSocket loop (no-op if already running).
     pub async fn start(&self, app: AppHandle, url: String, token: String) {
         let mut guard = self.handle.lock().await;
         if guard.is_some() {
@@ -44,6 +49,7 @@ impl PushClient {
         *guard = Some(task);
     }
 
+    /// Aborts the WebSocket connection task.
     pub async fn stop(&self) {
         let mut guard = self.handle.lock().await;
         if let Some(handle) = guard.take() {
@@ -52,6 +58,7 @@ impl PushClient {
     }
 }
 
+/// Reconnecting WebSocket loop with exponential backoff.
 async fn run_loop(app: AppHandle, url: String, token: String) {
     let mut delay_ms = RECONNECT_BASE_MS;
 
@@ -102,6 +109,7 @@ async fn run_loop(app: AppHandle, url: String, token: String) {
     }
 }
 
+/// Parses an incoming text frame and dispatches the notification.
 fn handle_text_message(app: &AppHandle, text: &str) {
     let payload: PushPayload = match serde_json::from_str(text) {
         Ok(p) => p,
@@ -120,6 +128,7 @@ fn handle_text_message(app: &AppHandle, text: &str) {
     show_system_notification(app, &notification);
 }
 
+/// Saves the notification to the database and emits a frontend event.
 fn persist_and_emit(app: &AppHandle, notification: &NotificationData) {
     if let Some(db_state) = app.try_state::<DbState>() {
         match db_state.0.lock() {
@@ -151,6 +160,7 @@ fn show_system_notification(app: &AppHandle, notification: &NotificationData) {
     }
 }
 
+/// Constructs the full WebSocket URL from a base HTTP/WS URL.
 pub fn build_websocket_url(base: &str) -> String {
     let base = base.trim_end_matches('/');
     if base.starts_with("https://") {

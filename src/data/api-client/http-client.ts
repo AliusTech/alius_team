@@ -3,6 +3,7 @@ import { API_ENDPOINTS } from './endpoints';
 import type { ErrorCode, APIError, ErrorResponse } from '@/shared/types/errors';
 import { getErrorMessage } from '@/shared/types/errors';
 
+/** HTTP client error with classified error codes. */
 export class HTTPClientError extends Error {
   public code: ErrorCode;
   public statusCode: number;
@@ -24,6 +25,7 @@ export class HTTPClientError extends Error {
   }
 
   // 从 API 响应创建错误
+  /** Creates an HTTPClientError from a structured API error response. */
   static fromAPIResponse(errorResponse: APIError): HTTPClientError {
     return new HTTPClientError(
       errorResponse.code,
@@ -34,21 +36,25 @@ export class HTTPClientError extends Error {
   }
 
   // 判断是否为认证错误
+  /** Returns true if the error is authentication-related. */
   isAuthError(): boolean {
     return this.code.startsWith('AUTH_');
   }
 
   // 判断是否为网络错误
+  /** Returns true if the error is network-related. */
   isNetworkError(): boolean {
     return this.code.startsWith('NETWORK_');
   }
 
   // 判断是否为服务器错误
+  /** Returns true if the error is a server-side error. */
   isServerError(): boolean {
     return this.code.startsWith('SERVER_');
   }
 
   // 判断是否可重试
+  /** Returns true if the request can be safely retried. */
   isRetryable(): boolean {
     return (
       this.isNetworkError() ||
@@ -104,6 +110,7 @@ async function refreshAccessToken(): Promise<string> {
 }
 
 // 解析错误响应
+/** Parses an HTTP error response into a classified HTTPClientError. */
 export async function parseErrorResponse(response: Response): Promise<HTTPClientError> {
   try {
     const errorData: ErrorResponse = await response.json();
@@ -130,6 +137,7 @@ export async function parseErrorResponse(response: Response): Promise<HTTPClient
   }
 }
 
+/** HTTP client with automatic token refresh and error classification. */
 export async function httpClient<T = unknown>(
   url: string,
   options: RequestOptions = {}

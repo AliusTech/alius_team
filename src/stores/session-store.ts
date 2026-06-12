@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { getSession, saveSession, clearSession as dbClearSession, updateAccessToken as dbUpdateAccessToken } from '@/data/db/commands';
 import type { Session, User } from '@/features/auth/types';
 
+/** Authentication session state — stores access token, user info, and login status. */
 export interface SessionState {
   session: Session | null;
   isAuthenticated: boolean;
@@ -15,6 +16,7 @@ export interface SessionState {
   updateAccessToken: (accessToken: string, expiresIn: number) => Promise<void>;
 }
 
+/** Zustand store hook for managing the current auth session (backed by local DB). */
 export const useSessionStore = create<SessionState>((set, get) => ({
   session: null,
   isAuthenticated: false,

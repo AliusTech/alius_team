@@ -1,11 +1,13 @@
 import { LottiePlayer } from '@/design-system/primitives/lottie-player';
 import { getAnimationData } from '@/assets/animations';
 
+/** Props for the LoadingOverlay component. */
 interface LoadingOverlayProps {
   visible: boolean;
   message?: string;
 }
 
+/** Full-screen modal overlay with a Lottie spinner and optional status message. */
 export function LoadingOverlay({ visible, message }: LoadingOverlayProps) {
   if (!visible) return null;
 

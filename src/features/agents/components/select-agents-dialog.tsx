@@ -15,6 +15,7 @@ interface SelectAgentsDialogProps {
   onClose: () => void;
 }
 
+/** Multi-step dialog for selecting agents, configuring a task, and launching. */
 export function SelectAgentsDialog({ open, onClose }: SelectAgentsDialogProps) {
   const { t } = useTranslation(['agents', 'common']);
   const { isPhone } = useBreakpoint();

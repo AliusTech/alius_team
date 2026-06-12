@@ -14,6 +14,7 @@ import type {
   DisconnectAgentRequest,
 } from '@/features/agents/types/agent';
 
+/** Agent management API methods for listing, connecting, messaging, and discovery. */
 export const agentsAPI = {
   // Agent 列表和详情
   getAgents: async (): Promise<Agent[]> => {

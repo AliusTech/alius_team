@@ -5,6 +5,7 @@ import { useLayoutStore } from '@/stores/layout-store';
 import { useBreakpoint } from '@/shared/hooks/use-breakpoint';
 import { Separator } from '@/design-system/primitives/separator';
 
+/** Context-aware detail panel content that switches based on the current route. */
 function InspectorContent() {
   const { t } = useTranslation('common');
   const location = useLocation();
@@ -47,6 +48,7 @@ function InspectorContent() {
   );
 }
 
+/** Right-side detail panel — full-height on desktop, overlay on tablet. */
 export function Inspector() {
   const { setInspectorCollapsed } = useLayoutStore();
   const { isTablet } = useBreakpoint();

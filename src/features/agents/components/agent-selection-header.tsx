@@ -1,11 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { X } from 'lucide-react';
 
+/** Props for the AgentSelectionHeader component. */
 interface AgentSelectionHeaderProps {
   onClose: () => void;
   currentStep: number;
 }
 
+/** Header for the agent selection dialog showing step-specific title and subtitle. */
 export function AgentSelectionHeader({ onClose, currentStep }: AgentSelectionHeaderProps) {
   const { t } = useTranslation('agents');
 

@@ -35,8 +35,10 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 const taskDotColors = ['#2d6ff2', '#7c3aed', '#d97706'];
 
+/** Sidebar display mode — expanded shows labels, collapsed hides them, rail is a narrow tablet strip. */
 type SidebarMode = 'expanded' | 'collapsed' | 'rail';
 
+/** Collapsible navigation sidebar with three display modes: expanded, collapsed, and rail (tablet hover). */
 export function Sidebar() {
   const { t } = useTranslation('common');
   const location = useLocation();

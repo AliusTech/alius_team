@@ -3,18 +3,21 @@ import { useTranslation } from 'react-i18next';
 import { dashboardStats } from '@/shared/mocks/dashboard-data';
 import { PageHeader } from '@/design-system/components';
 import { StatCard } from '@/design-system/components/stat-card';
+import { useTeamStore } from '@/stores/team-store';
 import { TaskTrendChart } from '../components/task-trend-chart';
 import { AgentCompletionChart } from '../components/agent-completion-chart';
 import { RecentTasksList } from '../components/recent-tasks-list';
 import { AgentStatusList } from '../components/agent-status-list';
 
+/** Main dashboard page showing stats, charts, recent tasks, and agent status. */
 export function DashboardPage() {
   const { t } = useTranslation('dashboard');
+  const teamName = useTeamStore((s) => s.teamName);
 
   return (
     <div className="flex flex-col gap-4">
       <PageHeader
-        title={t('page.title')}
+        title={teamName || t('page.title')}
         description={t('page.description')}
         icon={LayoutDashboard}
       />

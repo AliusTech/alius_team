@@ -1,10 +1,14 @@
+import { useState, useCallback } from 'react';
 import { FileText, AlertTriangle, Info, Bug, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Badge } from '@/design-system/primitives/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/design-system/primitives/tabs';
 import { Card, CardContent } from '@/design-system/primitives/card';
-import { PageHeader } from '@/design-system/components';
-import { logs } from '@/shared/mocks/logs-data';
+import { PageHeader, DeleteConfirmDialog, UndoToast } from '@/design-system/components';
+import { logs as initialLogs, type LogEntry } from '@/shared/mocks/logs-data';
+import { useDeletableList } from '@/shared/hooks/use-deletable-list';
+import { ListItemWrapper, BatchActionBar, KeyboardDeleteHandler } from '@/platform';
+import { usePlatformInput } from '@/platform/use-platform-input';
 
 const levelConfig = {
   info: { icon: Info, variant: 'default' as const, label: 'INFO', color: '#2d6ff2' },
@@ -13,7 +17,7 @@ const levelConfig = {
   debug: { icon: Bug, variant: 'secondary' as const, label: 'DEBUG', color: '#64748b' },
 };
 
-function LogRow({ log }: { log: typeof logs[number] }) {
+function LogRow({ log }: { log: LogEntry }) {
   const config = levelConfig[log.level];
   const Icon = config.icon;
 
@@ -39,22 +43,51 @@ function LogRow({ log }: { log: typeof logs[number] }) {
   );
 }
 
-function LogList({ filter }: { filter?: string }) {
-  const filtered = filter
-    ? logs.filter(l => l.level === filter)
-    : logs;
+function LogList({ items, list }: { items: LogEntry[]; list: ReturnType<typeof useDeletableList<LogEntry>> }) {
+  const handleDeleteOne = useCallback(
+    (id: string) => {
+      list.deleteOne(id);
+    },
+    [list],
+  );
 
   return (
     <div className="flex flex-col gap-3">
-      {filtered.map((log) => (
-        <LogRow key={log.id} log={log} />
+      {items.map((log) => (
+        <ListItemWrapper
+          key={log.id}
+          id={log.id}
+          isSelected={list.selectedIds.has(log.id)}
+          isSelectMode={list.isSelectMode}
+          onSelect={list.toggleSelect}
+          onDelete={handleDeleteOne}
+          onEnterSelectMode={list.enterSelectMode}
+        >
+          <LogRow log={log} />
+        </ListItemWrapper>
       ))}
     </div>
   );
 }
 
+/** Logs page displaying system log entries filterable by severity level with platform-adaptive deletion. */
 export function LogsPage() {
   const { t } = useTranslation('logs');
+  const { interactionMode } = usePlatformInput();
+  const [items, setItems] = useState<LogEntry[]>(initialLogs);
+
+  const list = useDeletableList<LogEntry>({
+    items,
+    deleteOne: async () => {},
+    deleteBatch: async () => {},
+    onItemsChange: setItems,
+  });
+
+  const filteredAll = items;
+  const filteredInfo = items.filter((l) => l.level === 'info');
+  const filteredWarn = items.filter((l) => l.level === 'warn');
+  const filteredError = items.filter((l) => l.level === 'error');
+
   return (
     <div className="flex flex-col gap-4">
       <PageHeader
@@ -71,11 +104,43 @@ export function LogsPage() {
           <TabsTrigger value="error">{t('tabs.error')}</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="all"><LogList /></TabsContent>
-        <TabsContent value="info"><LogList filter="info" /></TabsContent>
-        <TabsContent value="warn"><LogList filter="warn" /></TabsContent>
-        <TabsContent value="error"><LogList filter="error" /></TabsContent>
+        <TabsContent value="all"><LogList items={filteredAll} list={list} /></TabsContent>
+        <TabsContent value="info"><LogList items={filteredInfo} list={list} /></TabsContent>
+        <TabsContent value="warn"><LogList items={filteredWarn} list={list} /></TabsContent>
+        <TabsContent value="error"><LogList items={filteredError} list={list} /></TabsContent>
       </Tabs>
+
+      {list.isSelectMode && (
+        <BatchActionBar
+          selectedCount={list.selectedIds.size}
+          onDelete={list.deleteSelected}
+          onClearSelection={list.exitSelectMode}
+        />
+      )}
+
+      <DeleteConfirmDialog
+        open={list.isConfirmOpen}
+        onConfirm={list.confirmDelete}
+        onCancel={list.cancelDelete}
+        count={list.pendingDeleteIds.length}
+        itemName={list.pendingDeleteName}
+      />
+
+      <UndoToast
+        visible={list.undoAvailable}
+        count={list.pendingDeleteIds.length}
+        onUndo={list.undoDelete}
+        onDismiss={() => {}}
+      />
+
+      {interactionMode === 'mouse' && (
+        <KeyboardDeleteHandler
+          focusedId={list.focusedId}
+          onDelete={(id) => list.deleteOne(id)}
+          onExitSelectMode={list.exitSelectMode}
+          onSelectAll={list.selectAll}
+        />
+      )}
     </div>
   );
 }

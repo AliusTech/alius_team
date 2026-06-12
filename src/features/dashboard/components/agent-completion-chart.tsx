@@ -10,6 +10,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/des
 import { ChartContainer, ChartTooltip } from '@/design-system/primitives/chart';
 import { agentCompletionData } from '@/shared/mocks/dashboard-data';
 
+/** Bar chart displaying completed tasks per agent. */
 export function AgentCompletionChart() {
   const { t } = useTranslation('dashboard');
 

@@ -7,6 +7,7 @@ import { SelectAgentsDialog } from '@/features/agents/components/select-agents-d
 import { SettingsDialog } from '@/features/settings/components/settings-dialog';
 import { NotificationsDialog } from '@/features/notifications/components/notifications-dialog';
 
+/** Three-pane desktop/tablet layout with collapsible sidebar and inspector. */
 export function DesktopTabletLayout() {
   const { inspectorCollapsed, newTaskDialogOpen, setNewTaskDialogOpen, settingsDialogOpen, setSettingsDialogOpen, notificationsDialogOpen, setNotificationsDialogOpen } = useLayoutStore();
 

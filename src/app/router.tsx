@@ -22,6 +22,7 @@ function AppLayout() {
   );
 }
 
+/** Hash-based router with responsive layout switching. */
 export const router = createHashRouter([
   {
     path: '/login',

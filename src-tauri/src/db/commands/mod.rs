@@ -1,3 +1,5 @@
+//! Tauri commands for database CRUD operations.
+
 pub mod session;
 pub mod agent;
 pub mod notification;

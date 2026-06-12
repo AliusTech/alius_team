@@ -17,6 +17,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   ScrollText,
 };
 
+/** Tab-based bottom navigation bar for phone layout. */
 export function BottomNavigation() {
   const { t } = useTranslation('common');
   const location = useLocation();

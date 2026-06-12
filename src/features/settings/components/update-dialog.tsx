@@ -3,11 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { Download, X, RefreshCw } from 'lucide-react';
 import { relaunch } from '@tauri-apps/plugin-process';
 import { check } from '@tauri-apps/plugin-updater';
+import { cn } from '@/shared/utils/cn';
+import { useBreakpoint } from '@/shared/hooks/use-breakpoint';
 import { Button } from '@/design-system/primitives/button';
 import { useUpdateStore } from '@/stores/update-store';
 
+/** Dialog for downloading and installing application updates. */
 export function UpdateDialog() {
   const { t } = useTranslation('settings');
+  const { isPhone } = useBreakpoint();
   const {
     status, updateInfo, downloadProgress,
     setDownloading, setDownloaded, setError,
@@ -54,7 +58,10 @@ export function UpdateDialog() {
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" />
 
-      <div className="relative bg-card border border-border rounded-[14px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] w-[420px] overflow-hidden">
+      <div className={cn(
+        'relative bg-card border border-border rounded-[14px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] flex flex-col overflow-hidden',
+        isPhone ? 'inset-0 rounded-none' : 'w-[900px] max-h-[85vh]'
+      )}>
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4">
           <div className="flex items-center gap-2">

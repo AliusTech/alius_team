@@ -8,6 +8,7 @@ const statusDotColor: Record<AgentStatus['status'], string> = {
   error: '#dc2626',
 };
 
+/** List showing current status of all agents with online/offline indicators. */
 export function AgentStatusList() {
   const { t } = useTranslation('dashboard');
 

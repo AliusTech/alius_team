@@ -2,11 +2,13 @@ import { Users, Activity, Clock, UserCheck, UserX } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/design-system/primitives/card';
 import type { AgentSummary } from '../types';
 
+/** Props for the AgentSummaryCard component. */
 interface AgentSummaryCardProps {
   data: AgentSummary | undefined;
   isLoading: boolean;
 }
 
+/** Card displaying agent status counts (online, working, idle, waiting, offline). */
 export function AgentSummaryCard({ data, isLoading }: AgentSummaryCardProps) {
   if (isLoading) {
     return (

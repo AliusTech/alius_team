@@ -4,3 +4,6 @@ export { EmptyState } from './empty-state';
 export { AnimatedIllustration } from './animated-illustration';
 export { AnimatedEmptyState } from './animated-empty-state';
 export { LoadingOverlay } from './loading-overlay';
+export { DeleteConfirmDialog } from './delete-confirm-dialog';
+export { UndoToast } from './undo-toast';
+export { InfiniteScroll } from './infinite-scroll';

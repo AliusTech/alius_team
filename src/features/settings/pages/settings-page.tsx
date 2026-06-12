@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { User, Shield, Monitor, Palette, Info, Globe, RefreshCw } from 'lucide-react';
+import { User, Shield, Monitor, Palette, Info, Globe, RefreshCw, Users, UserCheck } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { check } from '@tauri-apps/plugin-updater';
 import { Card, CardContent, CardHeader, CardTitle } from '@/design-system/primitives/card';
@@ -8,6 +8,7 @@ import { Select } from '@/design-system/primitives/select';
 import type { SelectOption } from '@/design-system/primitives/select';
 import { useI18nStore, SUPPORTED_LOCALES, LOCALE_LABELS, type SupportedLocale } from '@/i18n/i18n-store';
 import { useThemeStore, type ThemeMode } from '@/stores/theme-store';
+import { useTeamStore } from '@/stores/team-store';
 import { useUpdateStore } from '@/stores/update-store';
 
 interface SettingsItem {
@@ -46,12 +47,17 @@ function SettingsSection({ title, items }: { title: string; items: SettingsItem[
   );
 }
 
+/** Settings page with sections for account, devices, appearance, language, and updates. */
 export function SettingsPage() {
   const { t } = useTranslation('settings');
   const locale = useI18nStore((s) => s.locale);
   const setLocale = useI18nStore((s) => s.setLocale);
   const mode = useThemeStore((s) => s.mode);
   const setMode = useThemeStore((s) => s.setMode);
+  const teamName = useTeamStore((s) => s.teamName);
+  const setTeamName = useTeamStore((s) => s.setTeamName);
+  const adminName = useTeamStore((s) => s.adminName);
+  const setAdminName = useTeamStore((s) => s.setAdminName);
 
   const [version, setVersion] = useState('');
   const updateStatus = useUpdateStore((s) => s.status);
@@ -114,6 +120,34 @@ export function SettingsPage() {
     {
       title: t('sections.account'),
       items: [
+        {
+          icon: Users,
+          label: t('items.teamName'),
+          description: t('items.teamNameDesc'),
+          trailing: (
+            <input
+              type="text"
+              value={teamName}
+              onChange={(e) => setTeamName(e.target.value)}
+              placeholder={t('items.teamNamePlaceholder')}
+              className="w-40 h-7 px-2 rounded-md bg-card border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary text-right"
+            />
+          ),
+        },
+        {
+          icon: UserCheck,
+          label: t('items.adminName'),
+          description: t('items.adminNameDesc'),
+          trailing: (
+            <input
+              type="text"
+              value={adminName}
+              onChange={(e) => setAdminName(e.target.value)}
+              placeholder={t('items.adminNamePlaceholder')}
+              className="w-40 h-7 px-2 rounded-md bg-card border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary text-right"
+            />
+          ),
+        },
         { icon: User, label: t('items.profile'), description: t('items.profileDesc') },
         { icon: Shield, label: t('items.security'), description: t('items.securityDesc') },
       ],

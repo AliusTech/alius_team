@@ -9,6 +9,7 @@ import { useLayoutStore } from '@/stores/layout-store';
 import { useNotificationStore } from '@/stores/notification-store';
 import { cn } from '@/shared/utils/cn';
 
+/** Floating control bar with notification, settings, and inspector toggle buttons. */
 export function FloatingControls() {
   const { t } = useTranslation('common');
   const { inspectorCollapsed, toggleInspector, setSettingsDialogOpen, setNotificationsDialogOpen } = useLayoutStore();

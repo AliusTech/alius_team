@@ -4,6 +4,7 @@ use crate::db::DbState;
 use crate::db::commands::session::get_session_inner;
 use tauri::{AppHandle, State};
 
+/// Starts the WebSocket push notification client.
 #[tauri::command]
 pub async fn start_push_client(
     app: AppHandle,
@@ -26,12 +27,14 @@ pub async fn start_push_client(
     Ok(())
 }
 
+/// Stops the WebSocket push notification client.
 #[tauri::command]
 pub async fn stop_push_client(push: State<'_, PushState>) -> Result<(), String> {
     push.0.stop().await;
     Ok(())
 }
 
+/// Returns whether the push client is currently connected.
 #[tauri::command]
 pub async fn is_push_connected(push: State<'_, PushState>) -> Result<bool, String> {
     Ok(push.0.is_running().await)

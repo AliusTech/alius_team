@@ -1,3 +1,5 @@
+//! WebSocket push notification client with automatic reconnection.
+
 pub mod client;
 pub mod commands;
 

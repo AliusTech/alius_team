@@ -20,7 +20,13 @@
     "about": "Aliusについて",
     "aboutDesc": "バージョン情報、オープンソースライセンス、お問い合わせ",
     "checkUpdate": "アップデートを確認",
-    "checkUpdateDesc": "新しいバージョンが利用可能か確認"
+    "checkUpdateDesc": "新しいバージョンが利用可能か確認",
+    "teamName": "チーム名",
+    "teamNameDesc": "ダッシュボードのタイトルに表示されます",
+    "teamNamePlaceholder": "チーム名を入力",
+    "adminName": "管理者名",
+    "adminNameDesc": "チーム管理者の名前",
+    "adminNamePlaceholder": "管理者名を入力"
   },
   "language": {
     "title": "言語",

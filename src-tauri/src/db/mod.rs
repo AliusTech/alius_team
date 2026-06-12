@@ -1,3 +1,5 @@
+//! SQLite database layer — connection management, schema, models, and Tauri commands.
+
 pub mod connection;
 pub mod schema;
 pub mod models;

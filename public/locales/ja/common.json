@@ -93,5 +93,25 @@
   "app": {
     "name": "Alius",
     "loading": "読み込み中..."
+  },
+  "loadingMore": "読み込み中…",
+  "noMore": "データはこれ以上ありません",
+  "deletion": {
+    "deleteOne": "削除",
+    "deleteSelected": "{{count}}件を削除",
+    "confirmTitle": "削除の確認",
+    "confirmMessage": "{{count}}件のアイテムを削除しますか？",
+    "confirmMessageOne": "「{{name}}」を削除しますか？",
+    "confirmAction": "削除",
+    "cancelAction": "キャンセル",
+    "selectAll": "すべて選択",
+    "enterSelectMode": "選択",
+    "exitSelectMode": "キャンセル",
+    "deleted": "{{count}}件を削除しました",
+    "undo": "元に戻す",
+    "deleteFailed": "削除に失敗しました",
+    "selectedCount": "{{count}}件選択中",
+    "selectItem": "選択",
+    "deselectItem": "選択解除"
   }
 }

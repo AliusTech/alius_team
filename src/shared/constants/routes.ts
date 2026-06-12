@@ -1,3 +1,4 @@
+/** Application route path constants. */
 export const ROUTES = {
   // Auth routes
   LOGIN: '/login',
@@ -24,6 +25,7 @@ export const ROUTES = {
   SETTINGS_ABOUT: '/app/settings/about',
 } as const;
 
+/** Primary sidebar navigation items with i18n label key, path, and icon name. */
 export const NAV_ITEMS = [
   {
     labelKey: 'common:nav.dashboard',

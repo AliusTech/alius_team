@@ -2,11 +2,13 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Check, ChevronDown } from 'lucide-react';
 import { cn } from '@/shared/utils/cn';
 
+/** A single option in a Select dropdown. */
 export interface SelectOption<T extends string> {
   value: T;
   label: string;
 }
 
+/** Props for the Select component. */
 export interface SelectProps<T extends string> {
   value: T;
   options: SelectOption<T>[];
@@ -16,6 +18,7 @@ export interface SelectProps<T extends string> {
   disabled?: boolean;
 }
 
+/** Dropdown select built on Radix UI DropdownMenu with check-mark selection indicator. */
 export function Select<T extends string>({
   value,
   options,

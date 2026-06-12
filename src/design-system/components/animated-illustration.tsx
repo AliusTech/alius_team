@@ -8,6 +8,7 @@ const sizeMap = {
   lg: 'w-44 h-44',
 } as const;
 
+/** Props for the AnimatedIllustration component. */
 interface AnimatedIllustrationProps {
   name: AnimationName;
   loop?: boolean;
@@ -17,6 +18,7 @@ interface AnimatedIllustrationProps {
   onComplete?: () => void;
 }
 
+/** Reusable Lottie animation wrapper sized by preset (sm, md, lg). */
 export function AnimatedIllustration({
   name,
   loop = true,

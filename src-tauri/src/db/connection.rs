@@ -2,8 +2,10 @@ use rusqlite::Connection;
 use std::sync::Mutex;
 use tauri::Manager;
 
+/// Thread-safe wrapper around a SQLite database connection.
 pub struct DbState(pub Mutex<Connection>);
 
+/// Opens (or creates) the SQLite database and runs schema migrations.
 pub fn init_db(app: &tauri::AppHandle) -> Result<DbState, String> {
     let app_dir = app
         .path()
@@ -17,11 +19,11 @@ pub fn init_db(app: &tauri::AppHandle) -> Result<DbState, String> {
     let conn = Connection::open(db_path)
         .map_err(|e| format!("Failed to open database: {}", e))?;
 
-    // 启用外键约束
+    // Enable foreign key constraints
     conn.execute_batch("PRAGMA foreign_keys = ON;")
         .map_err(|e| format!("Failed to enable foreign keys: {}", e))?;
 
-    // 创建表
+    // Create tables
     crate::db::schema::create_tables(&conn)?;
 
     Ok(DbState(Mutex::new(conn)))

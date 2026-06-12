@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 
+/// A push notification persisted locally.
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct NotificationData {
     pub id: String,

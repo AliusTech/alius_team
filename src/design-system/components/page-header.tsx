@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import { cn } from '@/shared/utils/cn';
 
+/** Props for the PageHeader component. */
 interface PageHeaderProps {
   title: string;
   description?: string;
@@ -9,6 +10,7 @@ interface PageHeaderProps {
   className?: string;
 }
 
+/** Page-level title bar with optional icon, description, and action slot. */
 export function PageHeader({ title, description, icon: Icon, action, className }: PageHeaderProps) {
   return (
     <div className={cn('flex items-start justify-between gap-4', className)}>

@@ -3,11 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/design-system/primitives/card';
 import type { TaskSummary } from '../types';
 
+/** Props for the TaskSummaryCard component. */
 interface TaskSummaryCardProps {
   data: TaskSummary | undefined;
   isLoading: boolean;
 }
 
+/** Card displaying task status counts (running, waiting, completed, failed). */
 export function TaskSummaryCard({ data, isLoading }: TaskSummaryCardProps) {
   const { t } = useTranslation('dashboard');
 

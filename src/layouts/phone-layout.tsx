@@ -8,6 +8,7 @@ import { SelectAgentsDialog } from '@/features/agents/components/select-agents-d
 import { SettingsDialog } from '@/features/settings/components/settings-dialog';
 import { NotificationsDialog } from '@/features/notifications/components/notifications-dialog';
 
+/** Phone layout with topbar, bottom navigation, and a bottom sheet for inspector content. */
 export function PhoneLayout() {
   const { t } = useTranslation('common');
   const { bottomSheetOpen, setBottomSheetOpen, settingsDialogOpen, setSettingsDialogOpen, notificationsDialogOpen, setNotificationsDialogOpen, newTaskDialogOpen, setNewTaskDialogOpen } = useLayoutStore();

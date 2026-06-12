@@ -6,6 +6,7 @@ import type {
   RecentErrorLog,
 } from '@/features/dashboard/types';
 
+/** Dashboard API methods for summary, events, and error logs. */
 export const dashboardAPI = {
   getSummary: async (): Promise<DashboardSummary> => {
     return httpClient<DashboardSummary>(API_ENDPOINTS.DASHBOARD.SUMMARY);

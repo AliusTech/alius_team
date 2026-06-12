@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 
+/// Authenticated session tokens and associated user profile.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct SessionData {
     pub access_token: String,
@@ -8,6 +9,7 @@ pub struct SessionData {
     pub user: UserData,
 }
 
+/// Profile data for the currently logged-in user.
 #[derive(Debug, Serialize, Deserialize)]
 pub struct UserData {
     pub id: String,

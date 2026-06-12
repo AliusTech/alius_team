@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+/** Detects whether the primary input method is touch (no hover + coarse pointer). */
 export function useInputMode() {
   const [isTouchPrimary, setIsTouchPrimary] = useState(false);
 

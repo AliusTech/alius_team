@@ -36,6 +36,7 @@ function StatusIcon({ status }: { status: RecentTask['status'] }) {
   }
 }
 
+/** List of recent tasks with status badges and progress indicators. */
 export function RecentTasksList() {
   const { t } = useTranslation(['dashboard', 'common']);
 
