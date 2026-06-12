@@ -1,0 +1,78 @@
+{
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "agents": "エージェント",
+    "automation": "自動化",
+    "logs": "ログ",
+    "settings": "設定"
+  },
+  "actions": {
+    "newTask": "新規タスク",
+    "add": "追加",
+    "cancel": "キャンセル",
+    "next": "次へ",
+    "previous": "前へ",
+    "save": "保存",
+    "delete": "削除",
+    "launch": "タスク開始",
+    "back": "戻る",
+    "all": "すべて",
+    "loading": "送信中...",
+    "sendCode": "コード取得",
+    "resendCode": "コード再送信",
+    "search": "検索"
+  },
+  "status": {
+    "running": "実行中",
+    "completed": "完了",
+    "failed": "失敗",
+    "pending": "待機中",
+    "idle": "アイドル",
+    "error": "エラー",
+    "active": "アクティブ"
+  },
+  "time": {
+    "justNow": "たった今",
+    "minutesAgo": "{{count}}分前",
+    "hoursAgo": "{{count}}時間前",
+    "yesterday": "昨日",
+    "today": "今日"
+  },
+  "units": {
+    "agents": "{{count}} エージェント",
+    "agentsShort": "{{count}} エージェント",
+    "members": "{{count}}件",
+    "people": "{{count}}人",
+    "rounds": "{{count}}ラウンド",
+    "tokens": "トークン",
+    "seconds": "{{count}}秒後に再送信可能"
+  },
+  "validation": {
+    "required": "この項目は必須です",
+    "phoneRequired": "電話番号を入力してください",
+    "phoneInvalid": "正しい電話番号を入力してください",
+    "codeRequired": "6桁のコードをすべて入力してください"
+  },
+  "empty": {
+    "noResults": "データなし",
+    "noMatchingAgents": "一致するエージェントが見つかりません",
+    "noMembers": "メンバーなし"
+  },
+  "inspector": {
+    "agentDetails": "エージェント詳細",
+    "selectAgent": "エージェントを選択して詳細を表示",
+    "taskDetails": "タスク詳細",
+    "selectTask": "タスクを選択して実行詳細を表示",
+    "selectHint": "エージェントまたはタスクを選択して詳細を表示"
+  },
+  "floatingControls": {
+    "notifications": "通知",
+    "settings": "設定",
+    "openInspector": "詳細パネルを開く",
+    "closeInspector": "詳細パネルを閉じる"
+  },
+  "app": {
+    "name": "Alius Team",
+    "loading": "読み込み中..."
+  }
+}

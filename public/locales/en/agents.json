@@ -1,0 +1,65 @@
+{
+  "page": {
+    "title": "Agents",
+    "description": "Manage your AI Agent team",
+    "addAgent": "Add Agent",
+    "searchPlaceholder": "Search agents..."
+  },
+  "todayTasks": "Today's Tasks",
+  "lastActive": "Last active: {{time}}",
+  "dialog": {
+    "steps": {
+      "select": "Select Agents",
+      "configure": "Configure Team",
+      "confirm": "Confirm Launch"
+    },
+    "searchPlaceholder": "Search agents or specialties...",
+    "selectedCount": "{{count}} selected",
+    "selectedTeam": "Selected Team",
+    "noMatching": "No matching agents found"
+  },
+  "headers": {
+    "selectTitle": "Add Agents",
+    "selectSubtitle": "Select agents to join the team",
+    "configureTitle": "Configure Team",
+    "configureSubtitle": "Set task parameters and execution mode",
+    "confirmTitle": "Confirm Launch",
+    "confirmSubtitle": "Review configuration and launch task"
+  },
+  "form": {
+    "taskName": "Task Name",
+    "taskNamePlaceholder": "Name your task",
+    "objective": "Objective",
+    "objectivePlaceholder": "Describe what this task should accomplish...",
+    "priority": "Priority",
+    "priorityHigh": "High",
+    "priorityMedium": "Medium",
+    "priorityLow": "Low",
+    "maxRounds": "Max Rounds",
+    "executionMode": "Execution Mode",
+    "sequential": "Sequential",
+    "sequentialDesc": "Agents execute one after another",
+    "parallel": "Parallel",
+    "parallelDesc": "Agents execute simultaneously"
+  },
+  "confirm": {
+    "unnamedTask": "Unnamed Task",
+    "priorityHigh": "High Priority",
+    "priorityMedium": "Medium Priority",
+    "priorityLow": "Low Priority",
+    "modeSequential": "Sequential",
+    "modeParallel": "Parallel",
+    "agentCount": "Agent Count",
+    "executionMethod": "Execution Mode",
+    "maxRounds": "Max Rounds",
+    "participatingTeam": "Participating Team",
+    "warning": "Once launched, agents will automatically assign subtasks based on the objective. You can check progress or pause the task from the task board at any time."
+  },
+  "teamMembers": {
+    "title": "Team Members",
+    "noMembers": "No members yet"
+  },
+  "sidebar": {
+    "addAgent": "Add Agents"
+  }
+}

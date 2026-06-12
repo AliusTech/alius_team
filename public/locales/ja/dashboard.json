@@ -1,0 +1,53 @@
+{
+  "page": {
+    "title": "ダッシュボード",
+    "description": "今日 · すべてのタスクとエージェントの実行状況"
+  },
+  "stats": {
+    "activeAgents": "アクティブエージェント",
+    "todayTasks": "今日のタスク",
+    "running": "実行中",
+    "failedTasks": "失敗タスク",
+    "tokenConsumption": "トークン消費",
+    "total": "計 {{count}}",
+    "comparedToYesterday": "↑ {{count}} 昨日比",
+    "estimatedMinutes": "約{{count}}分",
+    "needsAttention": "要対応",
+    "todayAccumulated": "今日の累計"
+  },
+  "recentTasks": {
+    "title": "最近のタスク",
+    "viewAll": "すべて",
+    "agentCount": "{{count}} エージェント"
+  },
+  "agentStatus": {
+    "title": "エージェント状況",
+    "todayTasks": "今日 {{count}} タスク"
+  },
+  "charts": {
+    "taskTrend": {
+      "title": "タスク活動トレンド",
+      "description": "今日 · 2時間ごと",
+      "tasks": "タスク数",
+      "tokens": "トークン (×100)"
+    },
+    "agentCompletion": {
+      "title": "エージェント完了数",
+      "description": "今日の累計 · エージェント別",
+      "completed": "完了数"
+    }
+  },
+  "taskSummary": {
+    "title": "タスク状況",
+    "runningTasks": "実行中のタスク",
+    "waitingApproval": "承認待ち",
+    "completed": "完了",
+    "failed": "失敗"
+  },
+  "tokenUsage": {
+    "title": "トークン使用量",
+    "todayTokens": "今日のトークン",
+    "monthlyUsage": "月間使用量",
+    "estimatedCost": "推定コスト"
+  }
+}

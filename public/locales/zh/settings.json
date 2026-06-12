@@ -1,0 +1,33 @@
+{
+  "page": {
+    "title": "设置",
+    "description": "应用偏好与账户管理"
+  },
+  "sections": {
+    "account": "账户",
+    "devices": "设备与外观",
+    "about": "关于"
+  },
+  "items": {
+    "profile": "个人信息",
+    "profileDesc": "管理你的账号信息与头像",
+    "security": "安全设置",
+    "securityDesc": "密码、两步验证、登录设备",
+    "devices": "设备管理",
+    "devicesDesc": "已连接的设备与授权管理",
+    "appearance": "外观设置",
+    "appearanceDesc": "主题、语言、通知偏好",
+    "about": "关于 Alius Team",
+    "aboutDesc": "版本信息、开源许可、联系方式"
+  },
+  "language": {
+    "title": "语言",
+    "description": "选择界面显示语言"
+  },
+  "theme": {
+    "title": "主题",
+    "light": "浅色",
+    "dark": "深色",
+    "system": "跟随系统"
+  }
+}

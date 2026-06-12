@@ -1,0 +1,53 @@
+{
+  "page": {
+    "title": "全局概览",
+    "description": "今日 · 全部任务与智能体运行状态"
+  },
+  "stats": {
+    "activeAgents": "活跃智能体",
+    "todayTasks": "今日任务",
+    "running": "运行中",
+    "failedTasks": "失败任务",
+    "tokenConsumption": "Token 消耗",
+    "total": "共 {{count}} 个",
+    "comparedToYesterday": "↑ {{count}} 较昨日",
+    "estimatedMinutes": "预计 {{count}} 分钟",
+    "needsAttention": "需要处理",
+    "todayAccumulated": "今日累计"
+  },
+  "recentTasks": {
+    "title": "近期任务",
+    "viewAll": "全部",
+    "agentCount": "{{count}} 个智能体"
+  },
+  "agentStatus": {
+    "title": "智能体状态",
+    "todayTasks": "今日 {{count}} 个任务"
+  },
+  "charts": {
+    "taskTrend": {
+      "title": "任务活动趋势",
+      "description": "今日 · 每 2 小时",
+      "tasks": "任务数",
+      "tokens": "Token (×100)"
+    },
+    "agentCompletion": {
+      "title": "智能体完成量",
+      "description": "今日累计 · 按智能体",
+      "completed": "完成量"
+    }
+  },
+  "taskSummary": {
+    "title": "Task 状态",
+    "runningTasks": "运行中的 Task",
+    "waitingApproval": "等待确认",
+    "completed": "已完成",
+    "failed": "失败"
+  },
+  "tokenUsage": {
+    "title": "Token 用量",
+    "todayTokens": "今日 Token",
+    "monthlyUsage": "本月用量",
+    "estimatedCost": "预估成本"
+  }
+}

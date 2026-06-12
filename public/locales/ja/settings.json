@@ -1,0 +1,33 @@
+{
+  "page": {
+    "title": "設定",
+    "description": "アプリの設定とアカウント管理"
+  },
+  "sections": {
+    "account": "アカウント",
+    "devices": "デバイスと外観",
+    "about": "について"
+  },
+  "items": {
+    "profile": "プロフィール",
+    "profileDesc": "アカウント情報とアバターの管理",
+    "security": "セキュリティ",
+    "securityDesc": "パスワード、二要素認証、ログインデバイス",
+    "devices": "デバイス管理",
+    "devicesDesc": "接続済みデバイスと認可管理",
+    "appearance": "外観設定",
+    "appearanceDesc": "テーマ、言語、通知設定",
+    "about": "Alius Teamについて",
+    "aboutDesc": "バージョン情報、オープンソースライセンス、お問い合わせ"
+  },
+  "language": {
+    "title": "言語",
+    "description": "表示言語を選択"
+  },
+  "theme": {
+    "title": "テーマ",
+    "light": "ライト",
+    "dark": "ダーク",
+    "system": "システム設定"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "page": {
+    "title": "Logs",
+    "description": "System logs and error tracking"
+  },
+  "tabs": {
+    "all": "All",
+    "info": "Info",
+    "warn": "Warning",
+    "error": "Error"
+  }
+}

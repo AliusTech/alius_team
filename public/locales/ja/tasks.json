@@ -1,0 +1,12 @@
+{
+  "page": {
+    "title": "自動化",
+    "description": "自動化タスクの管理と実行履歴の確認"
+  },
+  "tabs": {
+    "all": "すべて",
+    "running": "実行中",
+    "completed": "完了",
+    "error": "エラー"
+  }
+}

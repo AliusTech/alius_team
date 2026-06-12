@@ -1,0 +1,65 @@
+{
+  "page": {
+    "title": "智能体",
+    "description": "管理你的 AI Agent 团队",
+    "addAgent": "添加智能体",
+    "searchPlaceholder": "搜索智能体..."
+  },
+  "todayTasks": "今日任务",
+  "lastActive": "最后活跃：{{time}}",
+  "dialog": {
+    "steps": {
+      "select": "选择智能体",
+      "configure": "配置团队",
+      "confirm": "确认启动"
+    },
+    "searchPlaceholder": "搜索智能体或专长...",
+    "selectedCount": "已选 {{count}} 个",
+    "selectedTeam": "已选团队",
+    "noMatching": "未找到匹配的智能体"
+  },
+  "headers": {
+    "selectTitle": "加入智能体",
+    "selectSubtitle": "选择需要加入团队的智能体",
+    "configureTitle": "配置团队",
+    "configureSubtitle": "设置任务参数和执行方式",
+    "confirmTitle": "确认启动",
+    "confirmSubtitle": "检查配置并启动任务"
+  },
+  "form": {
+    "taskName": "任务名称",
+    "taskNamePlaceholder": "为你的任务起个名字",
+    "objective": "任务目标",
+    "objectivePlaceholder": "描述这个任务需要达成的目标...",
+    "priority": "优先级",
+    "priorityHigh": "高",
+    "priorityMedium": "中",
+    "priorityLow": "低",
+    "maxRounds": "最大轮次",
+    "executionMode": "执行模式",
+    "sequential": "顺序执行",
+    "sequentialDesc": "智能体按顺序依次执行",
+    "parallel": "并行执行",
+    "parallelDesc": "智能体同时执行任务"
+  },
+  "confirm": {
+    "unnamedTask": "未命名任务",
+    "priorityHigh": "高优先级",
+    "priorityMedium": "中优先级",
+    "priorityLow": "低优先级",
+    "modeSequential": "顺序",
+    "modeParallel": "并行",
+    "agentCount": "智能体数量",
+    "executionMethod": "执行方式",
+    "maxRounds": "最大轮次",
+    "participatingTeam": "参与团队",
+    "warning": "任务启动后，智能体将根据目标自动分配子任务并开始执行。你可以随时在任务看板中查看进度或暂停任务。"
+  },
+  "teamMembers": {
+    "title": "团队成员",
+    "noMembers": "暂无成员"
+  },
+  "sidebar": {
+    "addAgent": "加入智能体"
+  }
+}

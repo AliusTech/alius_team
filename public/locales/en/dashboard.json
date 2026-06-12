@@ -1,0 +1,53 @@
+{
+  "page": {
+    "title": "Dashboard",
+    "description": "Today · All tasks and agent status"
+  },
+  "stats": {
+    "activeAgents": "Active Agents",
+    "todayTasks": "Today's Tasks",
+    "running": "Running",
+    "failedTasks": "Failed Tasks",
+    "tokenConsumption": "Token Usage",
+    "total": "{{count}} total",
+    "comparedToYesterday": "↑ {{count}} vs yesterday",
+    "estimatedMinutes": "~{{count}} min",
+    "needsAttention": "Needs Attention",
+    "todayAccumulated": "Today's Total"
+  },
+  "recentTasks": {
+    "title": "Recent Tasks",
+    "viewAll": "All",
+    "agentCount": "{{count}} agents"
+  },
+  "agentStatus": {
+    "title": "Agent Status",
+    "todayTasks": "{{count}} tasks today"
+  },
+  "charts": {
+    "taskTrend": {
+      "title": "Task Activity Trend",
+      "description": "Today · Every 2 hours",
+      "tasks": "Tasks",
+      "tokens": "Tokens (×100)"
+    },
+    "agentCompletion": {
+      "title": "Agent Completions",
+      "description": "Today's total · By agent",
+      "completed": "Completed"
+    }
+  },
+  "taskSummary": {
+    "title": "Task Status",
+    "runningTasks": "Running Tasks",
+    "waitingApproval": "Waiting Approval",
+    "completed": "Completed",
+    "failed": "Failed"
+  },
+  "tokenUsage": {
+    "title": "Token Usage",
+    "todayTokens": "Today's Tokens",
+    "monthlyUsage": "Monthly Usage",
+    "estimatedCost": "Estimated Cost"
+  }
+}

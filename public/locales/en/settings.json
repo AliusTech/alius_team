@@ -1,0 +1,33 @@
+{
+  "page": {
+    "title": "Settings",
+    "description": "App preferences and account management"
+  },
+  "sections": {
+    "account": "Account",
+    "devices": "Device & Appearance",
+    "about": "About"
+  },
+  "items": {
+    "profile": "Profile",
+    "profileDesc": "Manage your account info and avatar",
+    "security": "Security",
+    "securityDesc": "Password, two-factor auth, login devices",
+    "devices": "Device Management",
+    "devicesDesc": "Connected devices and authorization",
+    "appearance": "Appearance",
+    "appearanceDesc": "Theme, language, notification preferences",
+    "about": "About Alius Team",
+    "aboutDesc": "Version info, open source licenses, contact"
+  },
+  "language": {
+    "title": "Language",
+    "description": "Choose display language"
+  },
+  "theme": {
+    "title": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "page": {
+    "title": "Automation",
+    "description": "Manage automated tasks and view run history"
+  },
+  "tabs": {
+    "all": "All",
+    "running": "Running",
+    "completed": "Completed",
+    "error": "Error"
+  }
+}

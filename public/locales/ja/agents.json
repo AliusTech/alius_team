@@ -1,0 +1,65 @@
+{
+  "page": {
+    "title": "エージェント",
+    "description": "AIエージェントチームを管理",
+    "addAgent": "エージェント追加",
+    "searchPlaceholder": "エージェントを検索..."
+  },
+  "todayTasks": "今日のタスク",
+  "lastActive": "最終アクティビティ：{{time}}",
+  "dialog": {
+    "steps": {
+      "select": "エージェント選択",
+      "configure": "チーム設定",
+      "confirm": "開始確認"
+    },
+    "searchPlaceholder": "エージェントまたは専門分野で検索...",
+    "selectedCount": "{{count}}件選択済み",
+    "selectedTeam": "選択済みチーム",
+    "noMatching": "一致するエージェントが見つかりません"
+  },
+  "headers": {
+    "selectTitle": "エージェント追加",
+    "selectSubtitle": "チームに参加するエージェントを選択",
+    "configureTitle": "チーム設定",
+    "configureSubtitle": "タスクパラメータと実行方法を設定",
+    "confirmTitle": "開始確認",
+    "confirmSubtitle": "設定を確認してタスクを開始"
+  },
+  "form": {
+    "taskName": "タスク名",
+    "taskNamePlaceholder": "タスクに名前を付けてください",
+    "objective": "タスク目標",
+    "objectivePlaceholder": "このタスクで達成すべき目標を記述...",
+    "priority": "優先度",
+    "priorityHigh": "高",
+    "priorityMedium": "中",
+    "priorityLow": "低",
+    "maxRounds": "最大ラウンド数",
+    "executionMode": "実行モード",
+    "sequential": "順次実行",
+    "sequentialDesc": "エージェントが順番に実行",
+    "parallel": "並列実行",
+    "parallelDesc": "エージェントが同時にタスクを実行"
+  },
+  "confirm": {
+    "unnamedTask": "無名タスク",
+    "priorityHigh": "高優先度",
+    "priorityMedium": "中優先度",
+    "priorityLow": "低優先度",
+    "modeSequential": "順次",
+    "modeParallel": "並列",
+    "agentCount": "エージェント数",
+    "executionMethod": "実行方法",
+    "maxRounds": "最大ラウンド数",
+    "participatingTeam": "参加チーム",
+    "warning": "タスク開始後、エージェントは目標に基づいてサブタスクを自動的に割り当て、実行を開始します。タスクボードでいつでも進捗を確認または一時停止できます。"
+  },
+  "teamMembers": {
+    "title": "チームメンバー",
+    "noMembers": "メンバーなし"
+  },
+  "sidebar": {
+    "addAgent": "エージェント追加"
+  }
+}

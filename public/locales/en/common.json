@@ -1,0 +1,78 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "agents": "Agents",
+    "automation": "Automation",
+    "logs": "Logs",
+    "settings": "Settings"
+  },
+  "actions": {
+    "newTask": "New Task",
+    "add": "Add",
+    "cancel": "Cancel",
+    "next": "Next",
+    "previous": "Previous",
+    "save": "Save",
+    "delete": "Delete",
+    "launch": "Launch Task",
+    "back": "Back",
+    "all": "All",
+    "loading": "Sending...",
+    "sendCode": "Get Code",
+    "resendCode": "Resend Code",
+    "search": "Search"
+  },
+  "status": {
+    "running": "Running",
+    "completed": "Completed",
+    "failed": "Failed",
+    "pending": "Pending",
+    "idle": "Idle",
+    "error": "Error",
+    "active": "Active"
+  },
+  "time": {
+    "justNow": "Just now",
+    "minutesAgo": "{{count}} min ago",
+    "hoursAgo": "{{count}} hr ago",
+    "yesterday": "Yesterday",
+    "today": "Today"
+  },
+  "units": {
+    "agents": "{{count}} agents",
+    "agentsShort": "{{count}} agents",
+    "members": "{{count}}",
+    "people": "{{count}} people",
+    "rounds": "{{count}} rounds",
+    "tokens": "Tokens",
+    "seconds": "{{count}}s to resend"
+  },
+  "validation": {
+    "required": "This field is required",
+    "phoneRequired": "Please enter your phone number",
+    "phoneInvalid": "Please enter a valid phone number",
+    "codeRequired": "Please enter the complete 6-digit code"
+  },
+  "empty": {
+    "noResults": "No data",
+    "noMatchingAgents": "No matching agents found",
+    "noMembers": "No members yet"
+  },
+  "inspector": {
+    "agentDetails": "Agent Details",
+    "selectAgent": "Select an agent to view details",
+    "taskDetails": "Task Details",
+    "selectTask": "Select a task to view run details",
+    "selectHint": "Select an Agent or Task to view details"
+  },
+  "floatingControls": {
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "openInspector": "Open details panel",
+    "closeInspector": "Close details panel"
+  },
+  "app": {
+    "name": "Alius Team",
+    "loading": "Loading..."
+  }
+}
