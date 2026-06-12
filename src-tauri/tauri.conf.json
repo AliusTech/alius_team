@@ -1,6 +1,6 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "Alius Team",
+  "productName": "Alius",
   "version": "0.1.0",
   "identifier": "tech.alius.team-client",
   "build": {
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Alius Team",
+        "title": "Alius",
         "width": 1280,
         "height": 800,
         "minWidth": 768,
@@ -39,7 +39,7 @@
       "icons/icon.ico"
     ],
     "category": "DeveloperTool",
-    "shortDescription": "Alius Team - Agent Management Client",
+    "shortDescription": "Alius - Agent Management Client",
     "longDescription": "Cross-platform Agent management client for managing, observing and controlling Alius platform Agent nodes and task execution status",
     "windows": {
       "wix": {

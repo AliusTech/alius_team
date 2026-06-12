@@ -38,7 +38,7 @@ export function DrawerNavigation() {
       <aside className="fixed left-0 top-0 bottom-0 z-50 w-72 bg-card border-r border-border shadow-lg animate-in slide-in-from-left">
         {/* Header */}
         <div className="h-14 border-b border-border flex items-center justify-between px-4">
-          <h2 className="text-base font-semibold text-foreground">Alius Team</h2>
+          <h2 className="text-base font-semibold text-foreground">{t('app.name')}</h2>
           <button
             onClick={() => setDrawerOpen(false)}
             className="p-2 hover:bg-accent rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center"

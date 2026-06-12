@@ -13,7 +13,7 @@ export function Topbar() {
       className="border-b border-border bg-card flex items-center justify-between px-4"
       style={{ paddingTop: 'var(--safe-area-top)', height: 'calc(3.5rem + var(--safe-area-top))' }}
     >
-      <h1 data-tauri-drag-region className="text-base font-semibold text-foreground">Alius Team</h1>
+      <h1 data-tauri-drag-region className="text-base font-semibold text-foreground">{t('app.name')}</h1>
       <div className="flex items-center gap-0.5">
         <button
           onClick={() => setNotificationsDialogOpen(true)}
