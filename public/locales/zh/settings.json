@@ -35,7 +35,17 @@
   "update": {
     "checking": "正在检查更新…",
     "upToDate": "已是最新版本",
-    "newVersion": "发现新版本 {{version}}，请前往下载",
-    "error": "检查更新失败，请稍后重试"
+    "newVersion": "发现新版本 {{version}}",
+    "error": "检查更新失败，请稍后重试",
+    "downloading": "正在下载更新…",
+    "downloaded": "更新已下载完成，请重启应用",
+    "dialog": {
+      "title": "发现新版本",
+      "newVersion": "有新版本可用",
+      "downloadInstall": "下载并安装",
+      "restart": "重启以更新",
+      "skip": "稍后",
+      "downloading": "正在下载 {{percent}}%"
+    }
   }
 }

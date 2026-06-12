@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { User, Shield, Monitor, Palette, Info, Globe, RefreshCw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { check } from '@tauri-apps/plugin-updater';
 import { Card, CardContent, CardHeader, CardTitle } from '@/design-system/primitives/card';
 import { Separator } from '@/design-system/primitives/separator';
 import { Select } from '@/design-system/primitives/select';
 import type { SelectOption } from '@/design-system/primitives/select';
 import { useI18nStore, SUPPORTED_LOCALES, LOCALE_LABELS, type SupportedLocale } from '@/i18n/i18n-store';
 import { useThemeStore, type ThemeMode } from '@/stores/theme-store';
-
-type UpdateStatus = 'idle' | 'checking' | 'upToDate' | 'newVersion' | 'error';
+import { useUpdateStore } from '@/stores/update-store';
 
 interface SettingsItem {
   icon: React.ElementType;
@@ -54,8 +54,9 @@ export function SettingsPage() {
   const setMode = useThemeStore((s) => s.setMode);
 
   const [version, setVersion] = useState('');
-  const [updateStatus, setUpdateStatus] = useState<UpdateStatus>('idle');
-  const [latestVersion, setLatestVersion] = useState('');
+  const updateStatus = useUpdateStore((s) => s.status);
+  const updateInfo = useUpdateStore((s) => s.updateInfo);
+  const { setChecking, setAvailable, setUpToDate, setError } = useUpdateStore();
 
   useEffect(() => {
     (async () => {
@@ -69,20 +70,20 @@ export function SettingsPage() {
   }, []);
 
   const checkForUpdate = async () => {
-    setUpdateStatus('checking');
+    setChecking();
     try {
-      const res = await fetch('https://api.github.com/repos/AliusTech/alius_team/releases/latest');
-      if (!res.ok) throw new Error('Failed to fetch');
-      const data = await res.json();
-      const remote = data.tag_name.replace(/^v/, '');
-      setLatestVersion(remote);
-      if (remote !== version) {
-        setUpdateStatus('newVersion');
+      const update = await check();
+      if (update) {
+        setAvailable({
+          version: update.version,
+          date: update.date?.toString(),
+          body: update.body ?? undefined,
+        });
       } else {
-        setUpdateStatus('upToDate');
+        setUpToDate();
       }
     } catch {
-      setUpdateStatus('error');
+      setError(t('update.error'));
     }
   };
 
@@ -90,7 +91,9 @@ export function SettingsPage() {
     switch (updateStatus) {
       case 'checking': return t('update.checking');
       case 'upToDate': return t('update.upToDate');
-      case 'newVersion': return t('update.newVersion', { version: latestVersion });
+      case 'available': return t('update.newVersion', { version: updateInfo?.version });
+      case 'downloading': return t('update.downloading');
+      case 'downloaded': return t('update.downloaded');
       case 'error': return t('update.error');
       default: return null;
     }

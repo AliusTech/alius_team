@@ -36,6 +36,16 @@
     "checking": "Checking for updates…",
     "upToDate": "You're on the latest version",
     "newVersion": "New version {{version}} available",
-    "error": "Update check failed. Please try again later"
+    "error": "Update check failed. Please try again later",
+    "downloading": "Downloading update…",
+    "downloaded": "Update downloaded. Restart to apply.",
+    "dialog": {
+      "title": "Update Available",
+      "newVersion": "New version available",
+      "downloadInstall": "Download & Install",
+      "restart": "Restart to Update",
+      "skip": "Later",
+      "downloading": "Downloading {{percent}}%"
+    }
   }
 }
