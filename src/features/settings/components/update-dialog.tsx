@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Download, X, RefreshCw } from 'lucide-react';
+import { Download, X, TriangleAlert } from 'lucide-react';
 import { relaunch } from '@tauri-apps/plugin-process';
 import { check } from '@tauri-apps/plugin-updater';
 import { cn } from '@/shared/utils/cn';
@@ -55,7 +55,7 @@ export function UpdateDialog() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center">
       <div className="absolute inset-0 bg-black/50" />
 
       <div className={cn(
@@ -135,8 +135,8 @@ export function UpdateDialog() {
             </Button>
           )}
           {status === 'downloaded' && (
-            <Button size="sm" onClick={handleRestart} loading={installing}>
-              <RefreshCw className="size-3.5 mr-1.5" />
+            <Button size="sm" variant="default" onClick={handleRestart} loading={installing}>
+              <TriangleAlert className="size-3.5 mr-1.5" />
               {t('update.dialog.restart')}
             </Button>
           )}
