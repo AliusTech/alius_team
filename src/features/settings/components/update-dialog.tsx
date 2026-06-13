@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Download, X, TriangleAlert } from 'lucide-react';
 import { relaunch } from '@tauri-apps/plugin-process';
@@ -19,6 +19,12 @@ export function UpdateDialog() {
 
   const [dismissed, setDismissed] = useState(false);
   const [installing, setInstalling] = useState(false);
+
+  // Auto-dismiss once download finishes so the user isn't blocked — they can
+  // restart later from the Settings page.
+  useEffect(() => {
+    if (status === 'downloaded') setDismissed(true);
+  }, [status]);
 
   if (dismissed) return null;
   if (status !== 'available' && status !== 'downloading' && status !== 'downloaded') return null;
