@@ -26,7 +26,9 @@
     "teamNamePlaceholder": "输入团队名称",
     "adminName": "管理员姓名",
     "adminNameDesc": "团队管理员称呼",
-    "adminNamePlaceholder": "输入管理员姓名"
+    "adminNamePlaceholder": "输入管理员姓名",
+    "logout": "退出登录",
+    "logoutDesc": "清除本地登录信息并返回登录页"
   },
   "language": {
     "title": "语言",

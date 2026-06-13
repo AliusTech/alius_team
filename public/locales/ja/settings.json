@@ -26,7 +26,9 @@
     "teamNamePlaceholder": "チーム名を入力",
     "adminName": "管理者名",
     "adminNameDesc": "チーム管理者の名前",
-    "adminNamePlaceholder": "管理者名を入力"
+    "adminNamePlaceholder": "管理者名を入力",
+    "logout": "ログアウト",
+    "logoutDesc": "ローカルセッションを削除してログイン画面に戻る"
   },
   "language": {
     "title": "言語",

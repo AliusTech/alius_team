@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Bell, X, CheckCheck, Trash2 } from 'lucide-react';
 import { cn } from '@/shared/utils/cn';
@@ -19,6 +19,7 @@ export function NotificationsDialog({ open, onClose }: NotificationsDialogProps)
   const { t } = useTranslation('common');
   const { isPhone } = useBreakpoint();
   const locale = useI18nStore((s) => s.locale);
+  const [openSwipeId, setOpenSwipeId] = useState<string | null>(null);
 
   const notifications = useNotificationStore((s) => s.notifications);
   const unreadCount = useNotificationStore((s) => s.unreadCount);
@@ -82,6 +83,8 @@ export function NotificationsDialog({ open, onClose }: NotificationsDialogProps)
                   locale={locale}
                   onOpen={handleOpen}
                   onDelete={remove}
+                  isSwipeOpen={openSwipeId === n.id}
+                  onSwipeOpenChange={(open) => setOpenSwipeId(open ? n.id : null)}
                 />
               ))}
             </div>

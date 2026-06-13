@@ -11,6 +11,8 @@ interface NotificationItemProps {
   locale: SupportedLocale;
   onOpen: (n: PushNotification) => void;
   onDelete: (id: string) => void;
+  isSwipeOpen?: boolean;
+  onSwipeOpenChange?: (open: boolean) => void;
 }
 
 function categoryIcon(category: NotificationCategory) {
@@ -20,7 +22,14 @@ function categoryIcon(category: NotificationCategory) {
 }
 
 /** Renders a single notification with icon, title, body, and platform-adaptive delete action. */
-export function NotificationItem({ notification, locale, onOpen, onDelete }: NotificationItemProps) {
+export function NotificationItem({
+  notification,
+  locale,
+  onOpen,
+  onDelete,
+  isSwipeOpen,
+  onSwipeOpenChange,
+}: NotificationItemProps) {
   const { t } = useTranslation('common');
   const Icon = categoryIcon(notification.category);
   const isHigh = notification.priority === 'high';
@@ -32,6 +41,8 @@ export function NotificationItem({ notification, locale, onOpen, onDelete }: Not
       isSelectMode={false}
       onSelect={() => {}}
       onDelete={onDelete}
+      isSwipeOpen={isSwipeOpen}
+      onSwipeOpenChange={onSwipeOpenChange}
     >
       <div
         role="button"

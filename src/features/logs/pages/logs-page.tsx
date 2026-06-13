@@ -62,6 +62,8 @@ function LogList({ items, list }: { items: LogEntry[]; list: ReturnType<typeof u
           onSelect={list.toggleSelect}
           onDelete={handleDeleteOne}
           onEnterSelectMode={list.enterSelectMode}
+          isSwipeOpen={list.openSwipeId === log.id}
+          onSwipeOpenChange={(open) => list.setOpenSwipeId(open ? log.id : null)}
         >
           <LogRow log={log} />
         </ListItemWrapper>

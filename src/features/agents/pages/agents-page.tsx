@@ -133,6 +133,8 @@ export function AgentsPage() {
                   onSelect={list.toggleSelect}
                   onDelete={handleDeleteOne}
                   onEnterSelectMode={list.enterSelectMode}
+                  isSwipeOpen={list.openSwipeId === agent.id}
+                  onSwipeOpenChange={(open) => list.setOpenSwipeId(open ? agent.id : null)}
                 >
                   <Card className="cursor-pointer hover:bg-accent transition-colors">
                     <CardContent className="flex flex-col gap-3">

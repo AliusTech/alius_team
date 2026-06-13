@@ -135,6 +135,8 @@ function TabContent({ status }: { status: string }) {
                   onSelect={list.toggleSelect}
                   onDelete={handleDeleteOne}
                   onEnterSelectMode={list.enterSelectMode}
+                  isSwipeOpen={list.openSwipeId === task.id}
+                  onSwipeOpenChange={(open) => list.setOpenSwipeId(open ? task.id : null)}
                 >
                   <TaskCard task={task} />
                 </ListItemWrapper>

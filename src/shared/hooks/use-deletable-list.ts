@@ -13,11 +13,13 @@ interface DeletableListReturn<T extends DeletableItem> {
   selectedIds: Set<string>;
   isSelectMode: boolean;
   focusedId: string | null;
+  openSwipeId: string | null;
   enterSelectMode: () => void;
   exitSelectMode: () => void;
   toggleSelect: (id: string) => void;
   selectAll: () => void;
   setFocusedId: (id: string | null) => void;
+  setOpenSwipeId: (id: string | null) => void;
   deleteOne: (id: string) => Promise<void>;
   deleteSelected: () => void;
   isConfirmOpen: boolean;
@@ -37,6 +39,7 @@ export function useDeletableList<T extends DeletableItem>(
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [focusedId, setFocusedId] = useState<string | null>(null);
+  const [openSwipeId, setOpenSwipeId] = useState<string | null>(null);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [pendingDeleteIds, setPendingDeleteIds] = useState<string[]>([]);
   const [pendingDeleteName, setPendingDeleteName] = useState<string | undefined>();
@@ -45,10 +48,14 @@ export function useDeletableList<T extends DeletableItem>(
   const undoSnapshot = useRef<{ items: T[]; ids: string[] } | null>(null);
   const undoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const enterSelectMode = useCallback(() => setIsSelectMode(true), []);
+  const enterSelectMode = useCallback(() => {
+    setIsSelectMode(true);
+    setOpenSwipeId(null);
+  }, []);
   const exitSelectMode = useCallback(() => {
     setIsSelectMode(false);
     setSelectedIds(new Set());
+    setOpenSwipeId(null);
   }, []);
 
   const toggleSelect = useCallback((id: string) => {
@@ -99,6 +106,7 @@ export function useDeletableList<T extends DeletableItem>(
       setIsConfirmOpen(false);
       setPendingDeleteIds([]);
       setPendingDeleteName(undefined);
+      setOpenSwipeId(null);
       if (isSelectMode) {
         setIsSelectMode(false);
         setSelectedIds(new Set());
@@ -149,11 +157,13 @@ export function useDeletableList<T extends DeletableItem>(
     selectedIds,
     isSelectMode,
     focusedId,
+    openSwipeId,
     enterSelectMode,
     exitSelectMode,
     toggleSelect,
     selectAll,
     setFocusedId,
+    setOpenSwipeId,
     deleteOne,
     deleteSelected,
     isConfirmOpen,
